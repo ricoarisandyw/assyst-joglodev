@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.adiputra.assyst.Activity.SaveLocationActivity">
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:background="#ff0000"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Save Location"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="@dimen/_16sdp"-->
+            <!--android:textColor="#fff"/>-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:padding="@dimen/_10sdp"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvId"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:text="ID"
+                android:visibility="gone"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/tvId"
+                android:id="@+id/tvId2"
+                android:visibility="gone"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+            <TextView
+                android:id="@+id/tvLocationName"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:text="Location"
+                android:textColor="#000"
+                android:layout_below="@+id/tvId"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/tvLocationName"
+                android:id="@+id/tvLocationName2"
+                android:layout_below="@+id/tvId2"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+            <TextView
+                android:id="@+id/tvAlamat"
+                android:layout_below="@+id/tvLocationName"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:textColor="#000"
+                android:text="Address"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/tvAlamat"
+                android:id="@+id/tvAlamat2"
+                android:layout_below="@+id/tvLocationName2"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="@dimen/_70sdp" />
+
+            <TextView
+                android:id="@+id/tvCoordinate"
+                android:layout_below="@+id/tvAlamat"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:text="Coordinate"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_below="@+id/tvAlamat2"
+                android:layout_toRightOf="@+id/tvCoordinate"
+                android:id="@+id/tvLatitude"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_40sdp" />
+
+            <TextView
+                android:layout_below="@+id/tvAlamat"
+                android:layout_toRightOf="@+id/tvLatitude"
+                android:id="@+id/tvLongitude"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_40sdp" />
+
+            <TextView
+                android:id="@+id/tvRadius"
+                android:textColor="#000"
+                android:layout_below="@+id/tvCoordinate"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:text="Radius"
+                android:gravity="left|center"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etRadius"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@+id/tvLatitude"
+                android:layout_toRightOf="@+id/tvMessage"/>
+
+            <TextView
+                android:id="@+id/tvMeter"
+                android:textColor="#000"
+                android:layout_toRightOf="@+id/etRadius"
+                android:layout_below="@+id/tvLongitude"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:gravity="left|center"
+                android:layout_height="@dimen/_40sdp"
+                android:text="meter"/>
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:textColor="#000"
+                android:layout_below="@+id/tvRadius"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:text="Message"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_below="@+id/tvRadius"
+                android:layout_toRightOf="@+id/tvMessage"
+                android:gravity="top"/>
+
+            <RelativeLayout
+                android:id="@+id/rlConfigure"
+                android:layout_below="@+id/etMessage"
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvConfigure"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Configure System"
+                    android:gravity="center_vertical"
+                    android:background="@color/bg_screen1"
+                    android:textAlignment="center"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvAudio"
+                    android:textColor="#000"
+                    android:layout_below="@+id/tvConfigure"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Audio"
+                    android:gravity="left|center"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_toRightOf="@id/tvAudio"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_below="@+id/tvConfigure"
+                    android:id="@+id/spinnerAudio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/audio_arrays"
+                    android:prompt="@string/audio_prompt">
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/tvWifi"
+                    android:textColor="#000"
+                    android:layout_below="@+id/tvAudio"
+                    android:padding="@dimen/_10sdp"
+                    android:gravity="left|center"
+                    android:text="Wifi"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_toRightOf="@id/tvWifi"
+                    android:layout_below="@+id/spinnerAudio"
+                    android:id="@+id/spinnerWifi"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/wifi_arrays"
+                    android:prompt="@string/wifi_prompt">
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/tvBluetooth"
+                    android:textColor="#000"
+                    android:layout_below="@+id/tvWifi"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Bluetooth"
+                    android:gravity="left|center"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_toRightOf="@id/tvBluetooth"
+                    android:layout_below="@+id/spinnerWifi"
+                    android:id="@+id/spinnerBluetooth"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/bluetooth_arrays"
+                    android:prompt="@string/bluetooth_prompt">
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/tvMobileData"
+                    android:textColor="#000"
+                    android:layout_below="@+id/tvBluetooth"
+                    android:padding="@dimen/_10sdp"
+                    android:gravity="left|center"
+                    android:text="Mobile Data"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_toRightOf="@id/tvBluetooth"
+                    android:layout_below="@+id/spinnerBluetooth"
+                    android:id="@+id/spinnerMobileData"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/mobiledata_arrays"
+                    android:prompt="@string/mobiledata_prompt">
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/tvAirPlane"
+                    android:textColor="#000"
+                    android:layout_below="@+id/tvMobileData"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Air Plane"
+                    android:gravity="left|center"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_toRightOf="@id/tvMobileData"
+                    android:layout_below="@+id/spinnerMobileData"
+                    android:id="@+id/spinnerAirPlane"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/airplane_arrays"
+                    android:prompt="@string/airplane_prompt">
+                </Spinner>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_below="@id/rlConfigure"
+                android:padding="@dimen/_10sdp"
+                android:layout_width="@dimen/_300sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/red"
+                android:textColor="#FFF"
+                android:text="SAVE"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

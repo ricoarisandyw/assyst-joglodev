@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tvDetailId"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailLokasi"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#000"
+        android:padding="@dimen/_5sdp"
+        android:layout_below="@+id/tvDetailId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailMessage"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#85CD00"
+        android:padding="@dimen/_5sdp"
+        android:layout_below="@+id/tvDetailLokasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvtvWifi"
+        android:padding="@dimen/_5sdp"
+        android:layout_below="@+id/tvDetailMessage"
+        android:text="WIFI"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailWifi"
+        android:padding="@dimen/_5sdp"
+        android:layout_toRightOf="@id/tvtvWifi"
+        android:layout_below="@+id/tvDetailMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvtvBluetooth"
+        android:padding="@dimen/_5sdp"
+        android:layout_below="@+id/tvtvWifi"
+        android:text="BLUETOOTH"
+        android:textColor="#000"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailBluetooth"
+        android:padding="@dimen/_5sdp"
+        android:layout_toRightOf="@+id/tvtvBluetooth"
+        android:layout_below="@+id/tvDetailWifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvtvAudio"
+        android:padding="@dimen/_5sdp"
+        android:layout_below="@+id/tvtvBluetooth"
+        android:text="AUDIO"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailAudio"
+        android:padding="@dimen/_5sdp"
+        android:layout_toRightOf="@id/tvtvAudio"
+        android:layout_below="@+id/tvDetailBluetooth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvtvAirPlane"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_below="@+id/tvtvAudio"
+        android:text="AIR PLANE"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailAirPlane"
+        android:padding="@dimen/_5sdp"
+        android:layout_toRightOf="@id/tvtvAirPlane"
+        android:layout_below="@+id/tvDetailAudio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvtvMobileData"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_below="@+id/tvtvAirPlane"
+        android:text="MOBILE DATA"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvDetailMobileData"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_toRightOf="@id/tvtvMobileData"
+        android:layout_below="@+id/tvDetailAirPlane"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/btnDetailDelete"
+        android:layout_below="@+id/tvDetailMobileData"
+        android:textStyle="bold"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:textColor="#FFF"
+        android:background="@color/red"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp" />
+
+    <ImageButton
+        android:id="@+id/btnDetailEdit"
+        android:layout_toRightOf="@+id/btnDetailDelete"
+        android:layout_below="@+id/tvDetailMobileData"
+        android:textStyle="bold"
+        android:src="@drawable/ic_edit_black_24dp"
+        android:textColor="#FFF"
+        android:background="#87CEEB"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnDetailDismiss"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvDetailMobileData"
+        android:layout_toRightOf="@+id/btnDetailEdit"
+        android:text="OK"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:background="#85CD00"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_50sdp" />
+
+</RelativeLayout>

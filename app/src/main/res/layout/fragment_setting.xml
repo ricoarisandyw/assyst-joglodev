@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:fillViewport="false"
+    android:scrollbars="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/_10sdp"
+        android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnEnableWifi"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="ENABLE WIFI"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnDisableWifi"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="DISABLE WIFI"
+        android:layout_below="@+id/btnEnableWifi"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnEnableBluetooth"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="ON BLUETOOTH"
+        android:layout_below="@+id/btnDisableWifi"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnDisableBluetooth"
+        android:layout_width="@dimen/_250sdp"
+        android:text="OFF BLUETOOTH"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_below="@+id/btnEnableBluetooth"
+        android:layout_alignLeft="@+id/btnEnableBluetooth"
+        android:layout_alignStart="@+id/btnEnableBluetooth" />
+
+    <Button
+        android:id="@+id/btnVibrateAudio"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="AUDIO VIBRATE"
+        android:layout_below="@+id/btnDisableBluetooth"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnNormalAudio"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="AUDIO NORMAL"
+        android:layout_below="@+id/btnVibrateAudio"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnSilentAudio"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="AUDIO SILENT"
+        android:layout_below="@+id/btnNormalAudio"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnEnableAirPlane"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="ENABLE AIR PLANE MODE"
+        android:layout_below="@+id/btnSilentAudio"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnDisableAirPlane"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="DISABLE AIR PLANE MODE"
+        android:layout_below="@+id/btnEnableAirPlane"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnEnableMobileData"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="ENABLE MOBILE DATA"
+        android:layout_below="@+id/btnDisableAirPlane"
+        android:layout_height="@dimen/_50sdp" />
+
+    <Button
+        android:id="@+id/btnDisableMobileData"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_centerHorizontal="true"
+        android:text="DISABLE MOBILE DATA"
+        android:layout_below="@+id/btnEnableMobileData"
+        android:layout_height="@dimen/_50sdp" />
+
+        <Button
+            android:id="@+id/btnTextToSpeech"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@+id/btnDisableMobileData"
+            android:layout_centerHorizontal="true"
+            android:text="text to speech" />
+
+        <Button
+            android:id="@+id/btnSpeechToText"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@+id/btnTextToSpeech"
+            android:layout_centerHorizontal="true"
+            android:text="speech to text" />
+
+    </RelativeLayout>
+</ScrollView>

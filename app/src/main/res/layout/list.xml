@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="@dimen/_10sdp"
+    android:paddingBottom="0dp"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <!--<TextView-->
+        <!--android:id="@+id/id"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="#000"-->
+        <!--android:paddingLeft="@dimen/_10sdp"-->
+        <!--android:paddingRight="@dimen/_10sdp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <TextView
+        android:id="@+id/alamat"
+        android:textColor="#000"
+        android:paddingRight="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lokasi"
+        android:textColor="#000"
+        android:layout_below="@+id/alamat"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#aaa"
+        android:layout_below="@+id/lokasi"/>
+
+</RelativeLayout>

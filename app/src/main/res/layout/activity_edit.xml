@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tvDetailId"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etDetailMessage"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#85CD00"
+        android:padding="@dimen/_5sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvDetailLokasi"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvtvWifi"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/etDetailMessage"
+        android:text="WIFI"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_toRightOf="@id/tvtvWifi"
+        android:layout_below="@+id/etDetailMessage"
+        android:id="@+id/spinnerWifi2"
+        android:padding="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/wifi_arrays"
+        android:prompt="@string/wifi_prompt">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tvtvBluetooth"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/tvtvWifi"
+        android:text="BLUETOOTH"
+        android:textColor="#000"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_toRightOf="@id/tvtvBluetooth"
+        android:layout_below="@+id/spinnerWifi2"
+        android:id="@+id/spinnerBluetooth2"
+        android:padding="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/bluetooth_arrays"
+        android:prompt="@string/bluetooth_prompt">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tvtvAudio"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/tvtvBluetooth"
+        android:text="AUDIO"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_toRightOf="@id/tvtvAudio"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/spinnerBluetooth2"
+        android:id="@+id/spinnerAudio2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/audio_arrays"
+        android:prompt="@string/audio_prompt">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tvtvAirPlane"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_below="@+id/tvtvAudio"
+        android:text="AIR PLANE"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_toRightOf="@id/tvtvAirPlane"
+        android:layout_below="@+id/spinnerAudio2"
+        android:id="@+id/spinnerAirPlane2"
+        android:padding="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/airplane_arrays"
+        android:prompt="@string/airplane_prompt">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tvtvMobileData"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_below="@+id/tvtvAirPlane"
+        android:text="MOBILE DATA"
+        android:textColor="#000"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_toRightOf="@id/tvtvMobileData"
+        android:layout_below="@+id/spinnerAirPlane2"
+        android:id="@+id/spinnerMobileData2"
+        android:padding="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/mobiledata_arrays"
+        android:prompt="@string/mobiledata_prompt">
+    </Spinner>
+
+    <Button
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/btnEditUpdate"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvtvMobileData"
+        android:layout_toRightOf="@+id/btnDetailEdit"
+        android:text="UPDATE"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="#87CEEB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
