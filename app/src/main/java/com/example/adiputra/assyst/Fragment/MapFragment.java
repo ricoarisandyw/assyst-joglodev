@@ -17,13 +17,21 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Activity.SaveLocationActivity;
+import com.example.adiputra.assyst.Model.ListLocation;
 import com.example.adiputra.assyst.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
@@ -41,6 +49,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -54,17 +68,65 @@ public class MapFragment extends Fragment  {
     }
 
     MapView mMapView;
+    private Context context;
     private GoogleMap map;
     private GoogleMap googleMap;
     public CharSequence locationName;
     public CharSequence alamat;
     public Double latitude;
     public Double longitude;
+    private RequestQueue requestQueue;
+    private Gson gson;
+    private int n;
+    private String[] loc = new String[100];
+    private float[] lat = new float[100];
+    private float[] lng = new float[100];
+    private int[] rad = new int[100];
     //private BluetoothAdapter BA;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+
+        //GET ALL LOCATION
+        final ArrayList<LatLng> coordinates = new ArrayList<LatLng>();
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        gson = gsonBuilder.create();
+        String GETLOC = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/show_location";
+        StringRequest req = new StringRequest(Request.Method.GET, GETLOC,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            //Log.i("Response : ", response);
+                            //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                            List<ListLocation> posts = Arrays.asList(gson.fromJson(response, ListLocation[].class));
+                            int i=0;
+                            for (ListLocation post : posts) {
+                                n = n+1;
+                                loc[i] = post.getLokasi();
+                                lat[i] = post.getLatitude();
+                                lng[i] = post.getLongitude();
+                                rad[i] = post.getRadius();
+                                i++;
+                            }
+
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Get Data : ", error.toString());
+                        Toast.makeText(context, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(req);
 
         mMapView = (MapView) rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
@@ -107,24 +169,32 @@ public class MapFragment extends Fragment  {
 //                                .title("My Location")
 //                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 8));
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14), 1500, null);
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 7), 1500, null);
+
+                        for(int i = 0; i <  n; ++i){
+                            coordinates.add(new LatLng(lat[i], lng[i]));
+                        }
+
+                        int i=0;
+                        for(LatLng cor : coordinates){
+                            googleMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(cor.latitude, cor.longitude))
+                                .title(loc[i])
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                            i++;
+                        }
+
                         //RUMUS
                         double x1, x2, y1, y2;
                         x1 = myLocation.getLatitude();
                         y1 = myLocation.getLongitude();
                         x2 = -7.276383; //lat PENS tujuan
                         y2 = 112.795164; //long PENS tujuan
-                        googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(-7.276383, 112.795164))
-                            .title("PENS")
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+//                        googleMap.addMarker(new MarkerOptions()
+//                            .position(new LatLng(-7.276383, 112.795164))
+//                            .title("PENS")
+//                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                         double jarak = 1500;
-//                        Double a = Math.acos(Math.sin(Math.toRadians(x0)));
-//                        Double b = Math.sin(Math.toRadians(x1));
-//                        Double c = Math.cos(Math.toRadians(y0-y1));
-//                        Double d = Math.cos(Math.toRadians(x0));
-//                        Double e = Math.cos(Math.toRadians(x1));
-//                        Double result = Math.abs((6371*a*b)+(c*d*e));
                         double R = 6372.8;
                         double dLat = Math.toRadians(x2 - x1);
                         double dLon = Math.toRadians(y2 - y1);
@@ -164,7 +234,7 @@ public class MapFragment extends Fragment  {
                             .setTicker("joglo-developer")
                             .setSmallIcon(android.R.drawable.star_on)
                             .setContentTitle("Assyst-Notification")
-                            .setContentText("Kamu Belum Sampai")
+                            .setContentText("Kamu Belum Sampai "+n)
                             .setAutoCancel(true)
                             .build();
                             NotificationManager notifier = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
