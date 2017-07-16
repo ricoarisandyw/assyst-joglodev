@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.adiputra.assyst.Activity.SpeechToTextActivity;
 import com.example.adiputra.assyst.Activity.TextToSpeechActivity;
+import com.example.adiputra.assyst.Activity.whonumberActivity;
 import com.example.adiputra.assyst.R;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
@@ -30,7 +31,7 @@ public class SettingFragment extends Fragment {
 
     private Button btnEnableWifi, btnDisableWifi, btnEnableBluetooth, btnDisableBluetooth, btnVibrateAudio,
             btnNormalAudio, btnSilentAudio, btnEnableAirPlane, btnDisableAirPlane, btnEnableMobileData, btnDisableMobileData,
-            btnSpeechToText, btnTextToSpeech;
+            btnSpeechToText, btnTextToSpeech, btnWhoIsThis;
     private BluetoothAdapter BA;
     private AudioManager myAudioManager;
 
@@ -157,6 +158,13 @@ public class SettingFragment extends Fragment {
                 Toast.makeText(getActivity(), "Mobile Data Disable", Toast.LENGTH_LONG).show();
             }
         });
-
+        btnWhoIsThis = (Button) view.findViewById(R.id.btnWhosNumber);
+        btnWhoIsThis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), whonumberActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

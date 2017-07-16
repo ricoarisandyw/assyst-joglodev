@@ -117,5 +117,13 @@
             android:layout_centerHorizontal="true"
             android:text="speech to text" />
 
+        <Button
+            android:id="@+id/btnWhosNumber"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@+id/btnSpeechToText"
+            android:layout_centerHorizontal="true"
+            android:text="speech to text" />
+
     </RelativeLayout>
 </ScrollView>
