@@ -71,7 +71,12 @@ public class ListFragment extends Fragment {
                                         post.getId(),
                                         post.getAlamat(),
                                         post.getLokasi(),
-                                        post.getMessage()
+                                        post.getMessage(),
+                                        post.getWifi(),
+                                        post.getBluetooth(),
+                                        post.getAudio(),
+                                        post.getAir_plane(),
+                                        post.getMobile_data()
                                 ));
                             }
                             mAdapter.notifyDataSetChanged();
