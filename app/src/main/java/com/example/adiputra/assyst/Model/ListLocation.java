@@ -46,17 +46,11 @@ public class ListLocation {
         this.setMobile_data(mobile_data);
     }
 
-    public ListLocation(int id, String lokasi, String alamat, String message, String wifi,
-                        String bluetooth, String audio, String air_plane, String mobile_data) {
+    public ListLocation(int id, String lokasi, String alamat, String message) {
         this.setId(id);
         this.setLokasi(lokasi);
         this.setAlamat(alamat);
         this.setMessage(message);
-        this.setWifi(wifi);
-        this.setBluetooth(bluetooth);
-        this.setAudio(audio);
-        this.setAir_plane(air_plane);
-        this.setMobile_data(mobile_data);
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 package com.example.adiputra.assyst.Activity;
 
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.adiputra.assyst.R;
+import com.example.adiputra.assyst.TestReceiver;
 
 import java.util.Locale;
 
-public class TextToSpeechActivity extends AppCompatActivity implements
-        TextToSpeech.OnInitListener{
+public class TextToSpeechActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
     private TextToSpeech tts;
     Button btnSpeak;
@@ -23,7 +24,7 @@ public class TextToSpeechActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_to_speech);
-
+//        tts.setLanguage(new Locale("id","ID"));
         tts = new TextToSpeech(this, this);
 
         btnSpeak = (Button) findViewById(R.id.btnStartSpeak);
@@ -70,9 +71,7 @@ public class TextToSpeechActivity extends AppCompatActivity implements
     }
 
     private void speakOut() {
-
         String text = txtText.getText().toString();
-
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 }

@@ -9,33 +9,33 @@
 
     <string name="audio_prompt">Choose a audio configure</string>
     <string-array name="audio_arrays">
-        <item>MUTE</item>
-        <item>VIBRATE</item>
-        <item>SOUND</item>
+        <item>Mute</item>
+        <item>Vibrate</item>
+        <item>Sound</item>
+    </string-array>
+
+    <string name="bluetooth_prompt">Choose a audio configure</string>
+    <string-array name="bluetooth_arrays">
+        <item>On</item>
+        <item>Off</item>
+    </string-array>
+
+    <string name="airplane_prompt">Choose a audio configure</string>
+    <string-array name="airplane_arrays">
+        <item>On</item>
+        <item>Off</item>
+    </string-array>
+
+    <string name="mobiledata_prompt">Choose a audio configure</string>
+    <string-array name="mobiledata_arrays">
+        <item>On</item>
+        <item>Off</item>
     </string-array>
 
     <string name="wifi_prompt">Choose a wifi configure</string>
     <string-array name="wifi_arrays">
-        <item>ON</item>
-        <item>OFF</item>
-    </string-array>
-
-    <string name="bluetooth_prompt">Choose a bluetooth configure</string>
-    <string-array name="bluetooth_arrays">
-        <item>ON</item>
-        <item>OFF</item>
-    </string-array>
-
-    <string name="mobiledata_prompt">Choose a mobiledata configure</string>
-    <string-array name="mobiledata_arrays">
-        <item>ON</item>
-        <item>OFF</item>
-    </string-array>
-
-    <string name="airplane_prompt">Choose a airplane configure</string>
-    <string-array name="airplane_arrays">
-        <item>ON</item>
-        <item>OFF</item>
+        <item>On</item>
+        <item>Off</item>
     </string-array>
 
     <string name="speech_prompt">Say something&#8230;</string>

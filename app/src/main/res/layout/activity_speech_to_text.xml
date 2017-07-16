@@ -33,6 +33,13 @@
             android:background="@null"
             android:src="@mipmap/ico_mic" />
 
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@mipmap/ic_launcher_round" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

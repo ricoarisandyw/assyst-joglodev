@@ -68,15 +68,10 @@ public class ListFragment extends Fragment {
                             List<ListLocation> posts = Arrays.asList(gson.fromJson(response, ListLocation[].class));
                             for (ListLocation post : posts) {
                                 listData.add(new ListLocation(
-                                    post.getId(),
-                                    post.getAlamat(),
-                                    post.getLokasi(),
-                                    post.getMessage(),
-                                    post.getWifi(),
-                                    post.getBluetooth(),
-                                    post.getAudio(),
-                                    post.getAir_plane(),
-                                    post.getMobile_data()
+                                        post.getId(),
+                                        post.getAlamat(),
+                                        post.getLokasi(),
+                                        post.getMessage()
                                 ));
                             }
                             mAdapter.notifyDataSetChanged();

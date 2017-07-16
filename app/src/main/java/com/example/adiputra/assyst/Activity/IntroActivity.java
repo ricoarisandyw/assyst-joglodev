@@ -38,7 +38,6 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
@@ -58,6 +57,8 @@ public class IntroActivity extends AppCompatActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
+
+
 
         // layouts of all welcome sliders
         // add few more layouts if you want
