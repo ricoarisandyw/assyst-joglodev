@@ -3,6 +3,7 @@ package com.example.adiputra.assyst;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -18,42 +19,50 @@ import com.example.adiputra.assyst.Activity.TextToSpeechActivity;
  */
 
 public class IncomingSms extends BroadcastReceiver {
-
-    final SmsManager sms = SmsManager.getDefault();
-
-    String body = null;
-    String no = "15555215558";
-
+    private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+    private static final String TAG = "SMSBroadcastReceiver";
+    Context coni;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Parse the SMS.
-        Bundle bundle = intent.getExtras();
-        SmsMessage[] msgs = null;
-        String str = "";
-        if (bundle != null) {
-            // Retrieve the SMS.
-            Object[] pdus = (Object[]) bundle.get("pdus");
-            msgs = new SmsMessage[pdus.length];
-            for (int i = 0; i < msgs.length; i++) {
-                msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-
-                if (msgs[i].getOriginatingAddress().equals(no)) {
-                    body = msgs[i].getMessageBody();
-
-                    str += "SMS from " + msgs[i].getOriginatingAddress();
-                    str += " :";
-                    str += msgs[i].getMessageBody().toString();
-                    str += "\n";
-                    Log.d("Pesan Masuk",str);
-                    Intent open = new Intent(context, SpeechToTextActivity.class);
-                    open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    open.putExtra("body", body);
-                    context.startActivity(open);
+        Log.i(TAG, "Intent recieved: " + intent.getAction());
+        coni = context;
+        if (intent.getAction().equals(SMS_RECEIVED)) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                Object[] pdus = (Object[]) bundle.get("pdus");
+                final SmsMessage[] messages = new SmsMessage[pdus.length];
+                for (int i = 0; i < pdus.length; i++) {
+                    messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                }
+                if (messages.length > -1) {
+                    Log.d("Pesan", messages[0].getMessageBody());
+                    Intent i = new Intent(context, SpeechToTextActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    saveData("kontak", "Code002"+messages[0].getMessageBody());
+                    context.startActivity(i);
                 }
             }
-            // Display the SMS as Toast.
-            Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
         }
+    }
+    public void saveData(String name, String value){
+        SharedPreferences prefs = coni.getSharedPreferences("UserData", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(name, value);
+        Log.d(name + " masuk :", value);
+        editor.commit();
+    }
+    public String loadData(String name){
+        SharedPreferences prefs = coni.getSharedPreferences("UserData", 0);
+        String data = prefs.getString(name,"");
+        Log.d(name + " keluar:", data);
+        return data;
+    }
+    public void deleteData(){
+        SharedPreferences prefs = coni.getSharedPreferences("UserData", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("username", "");
+        Log.d("Hapus Data:", "");
+        editor.commit();
     }
 }

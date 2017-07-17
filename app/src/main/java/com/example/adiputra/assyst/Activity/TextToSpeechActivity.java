@@ -19,6 +19,7 @@ public class TextToSpeechActivity extends AppCompatActivity implements TextToSpe
     private TextToSpeech tts;
     Button btnSpeak;
     EditText txtText;
+    Intent i = getIntent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,16 @@ public class TextToSpeechActivity extends AppCompatActivity implements TextToSpe
         setContentView(R.layout.activity_text_to_speech);
 //        tts.setLanguage(new Locale("id","ID"));
         tts = new TextToSpeech(this, this);
+        String s = i.getStringExtra("nomor");
+        if(s==null){
+            s="anonymous";
+        }
 
         btnSpeak = (Button) findViewById(R.id.btnStartSpeak);
-
         txtText = (EditText) findViewById(R.id.etTextToSpeech);
+        s = "you ,got, incoming, call, from," + s;
+        txtText.setText(s);
+        speakOut();
 
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -43,25 +43,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        try{
-            String user = loadData("username");
-            String pass = loadData("password");
-            Log.d("User dan Pass", user + pass);
-            if(user!=null||!user.equalsIgnoreCase("")){
-                if(pass!=null||!pass.equalsIgnoreCase("")){
-                    if(cekLog(user,pass)){
-                        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
-                    }
-                }
-            }
-        }catch (Exception e){
-
-        }
-
         requestQueue = Volley.newRequestQueue(LoginActivity.this);
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         gson = gsonBuilder.create();
+
+        String user = loadData("username");
+        String pass = loadData("password");
+        Log.d("User dan Pass", user + pass);
+        Toast.makeText(LoginActivity.this, "Login sebagai " + user, Toast.LENGTH_SHORT).show();
+
+        if (cekLog(user, pass)) {
+            startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+            Log.d("User dan Pass", "Direct Login");
+            finish();
+        }
 
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
         Button btnSignUp = (Button) findViewById(R.id.btnToSignUp);
@@ -71,19 +67,23 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                progress=new ProgressDialog(LoginActivity.this);
+                progress = new ProgressDialog(LoginActivity.this);
                 progress.setMessage("Harap tunggu...");
                 progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progress.setIndeterminate(true);
                 progress.setProgress(0);
                 progress.setCanceledOnTouchOutside(false);
                 progress.show();
-                if(cekLog(etName.getText().toString(),etPass.getText().toString())){
-                    saveData("username", etName.getText().toString());//!!!
-                    saveData("password", etPass.getText().toString());
-                    startActivity(new Intent(LoginActivity.this, MenuActivity.class));
-                }else{
-                    Toast.makeText(LoginActivity.this, "Username/Password Salah", Toast.LENGTH_SHORT).show();
+                if (etName.getText().toString().isEmpty() && etPass.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Username/Password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (cekLog(etName.getText().toString(), etPass.getText().toString())) {
+                        saveData("username", etName.getText().toString());
+                        saveData("password", etPass.getText().toString());
+                        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Username/Password Salah", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 progress.hide();
             }
@@ -96,29 +96,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public boolean noblank(){
-
-        if(etName.getText().equals("")||etName.getText().equals(null)){
-            return false;
-        }
-        if(etPass.getText().equals("")||etPass.getText().equals(null)){
-
-            return false;
-        }
-        return true;
-    }
-    public boolean cekLog(final String uname, final String pass){
+    public boolean cekLog(final String uname, final String pass) {
         String url = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/show_user";
         StringRequest req = new StringRequest(url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
 //                            Log.i("Response : ", response);
                             List<User> posts = Arrays.asList(gson.fromJson(response, User[].class));
 //                            Log.d("Pesan", Integer.toString(posts.size()));
-                            for (int i = 0;i<posts.size();i++) {
-                                Log.d("Pesan 2", i+">"+posts.get(i).getUsername());
+                            for (int i = 0; i < posts.size(); i++) {
+                                Log.d("Pesan 2", i + ">" + posts.get(i).getUsername());
                                 userList.add(new User(
                                         posts.get(i).getUsername(),
                                         posts.get(i).getEmail(),
@@ -127,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                 ));
                             }
                             progress.hide();
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -139,47 +128,46 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
-        ){
+        ) {
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
 //                params.put("user_id",user_id);
                 return params;
             }
         };
         requestQueue.add(req);
-        try{
-            for(User user :userList) {
-                if (user.getUsername().equalsIgnoreCase(uname) || user.getPhone().equalsIgnoreCase(uname)) {
-                    if (user.getPassword().equalsIgnoreCase(pass)) {
-                        return true;
-                    }else{
-                        Log.d("UserEx", user.getPassword() + "XXX" + pass);
-                    }
-                }else{
-                    Log.d("UserEx", user.getUsername() + "XXX" + uname);
+        for (User user : userList) {
+            if (user.getUsername().equalsIgnoreCase(uname) || user.getPhone().equalsIgnoreCase(uname)) {
+                if (user.getPassword().equalsIgnoreCase(pass)) {
+                    return true;
+                } else {
+                    Log.d("UserEx", user.getPassword() + "XXX" + pass);
                 }
+            } else {
                 Log.d("UserEx", user.getUsername() + "XXX" + uname);
             }
-        }catch(Exception e){
-            Log.d("UserEx", e.toString());
+            Log.d("UserEx", user.getUsername() + "XXX" + uname);
         }
         return false;
     }
-    public void saveData(String name, String value){
+
+    public void saveData(String name, String value) {
         SharedPreferences prefs = getSharedPreferences("UserData", 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(name, value);
         Log.d(name + " masuk :", value);
         editor.commit();
     }
-    public String loadData(String name){
+
+    public String loadData(String name) {
         SharedPreferences prefs = getSharedPreferences("UserData", 0);
-        String data = prefs.getString(name,"");
+        String data = prefs.getString(name, "");
         Log.d(name + " keluar:", data);
         return data;
     }
-    public void deleteData(){
+
+    public void deleteData() {
         SharedPreferences prefs = getSharedPreferences("UserData", 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", "");
