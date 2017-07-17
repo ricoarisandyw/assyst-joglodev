@@ -12,9 +12,9 @@ public class ListLocation {
     //@SerializedName("alamat")
     private String alamat;
     //@SerializedName("latitude")
-    private Float latitude;
+    private float latitude;
     //@SerializedName("longitude")
-    private Float longitude;
+    private float longitude;
     //@SerializedName("message")
     private String message;
     //@SerializedName("radius")
@@ -46,11 +46,17 @@ public class ListLocation {
         this.setMobile_data(mobile_data);
     }
 
-    public ListLocation(int id, String lokasi, String alamat, String message) {
+    public ListLocation(int id, String lokasi, String alamat, String message, String wifi,
+                        String bluetooth, String audio, String air_plane, String mobile_data) {
         this.setId(id);
         this.setLokasi(lokasi);
         this.setAlamat(alamat);
         this.setMessage(message);
+        this.setWifi(wifi);
+        this.setBluetooth(bluetooth);
+        this.setAudio(audio);
+        this.setAir_plane(air_plane);
+        this.setMobile_data(mobile_data);
     }
 
     public int getId() {
@@ -150,7 +156,7 @@ public class ListLocation {
     }
 
 
-//    public String toString(){
+    //    public String toString(){
 //        return getAlamat()+""+getLokasi();
 //    }
 //

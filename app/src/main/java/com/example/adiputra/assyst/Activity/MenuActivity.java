@@ -1,5 +1,6 @@
 package com.example.adiputra.assyst.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import com.example.adiputra.assyst.Fragment.ListFragment;
 import com.example.adiputra.assyst.Fragment.MapFragment;
 import com.example.adiputra.assyst.R;
 import com.example.adiputra.assyst.Fragment.SettingFragment;
+import com.example.adiputra.assyst.Service.MapIntentService;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -17,6 +19,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Intent i = new Intent(getBaseContext(), MapIntentService.class);
+        startService(i);
 
         //Daftar Menu pada Tab
         TabLayout tab = (TabLayout) findViewById(R.id.tab1);

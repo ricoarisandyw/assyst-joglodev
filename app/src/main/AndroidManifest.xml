@@ -17,10 +17,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <service android:name="com.example.musicplayer.MusicService" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <user-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -94,9 +90,7 @@
         <activity android:name=".TestLocationActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.whonumberActivity" />
-        <activity android:name=".Activity.SignUpActivity" />
-        <activity android:name=".song" />
-        <activity android:name=".Activity.songlistActivity"></activity>
+        <activity android:name=".Activity.SignUpActivity"></activity>
     </application>
 
 </manifest>
