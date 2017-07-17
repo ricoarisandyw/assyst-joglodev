@@ -14,7 +14,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/tvDetailLokasi"
+        android:id="@+id/tvDetailAlamat"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="#000"
@@ -29,7 +29,7 @@
         android:gravity="center"
         android:textColor="#85CD00"
         android:padding="@dimen/_5sdp"
-        android:layout_below="@+id/tvDetailLokasi"
+        android:layout_below="@+id/tvDetailAlamat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

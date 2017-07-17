@@ -69,8 +69,8 @@ public class ListFragment extends Fragment {
                             for (ListLocation post : posts) {
                                 listData.add(new ListLocation(
                                         post.getId(),
-                                        post.getAlamat(),
                                         post.getLokasi(),
+                                        post.getAlamat(),
                                         post.getMessage(),
                                         post.getWifi(),
                                         post.getBluetooth(),
