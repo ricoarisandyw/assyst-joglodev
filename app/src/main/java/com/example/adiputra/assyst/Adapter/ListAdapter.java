@@ -68,21 +68,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         //tambah (ListLocation)
         final ListLocation l = (ListLocation) listData.get(position);
         //test
-        holder.alamat.setText(l.getAlamat());
         holder.lokasi.setText(l.getLokasi());
-        holder.lokasi.setOnClickListener(new View.OnClickListener() {
+        holder.alamat.setText(l.getAlamat());
+        holder.alamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Toast.makeText(context, ""+l.getAlamat(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, ""+l.getLokasi(), Toast.LENGTH_SHORT).show();
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.activity_detail);
-                dialog.setTitle(l.getAlamat());
+                dialog.setTitle(l.getLokasi());
                 //set ID
                 TextView tvDetailId = (TextView) dialog.findViewById(R.id.tvDetailId);
                 tvDetailId.setText(String.valueOf(l.getId()));
                 //set Lokasi
-                TextView tvDetailLokasi = (TextView) dialog.findViewById(R.id.tvDetailLokasi);
-                tvDetailLokasi.setText(l.getLokasi());
+                TextView tvDetailAlamat = (TextView) dialog.findViewById(R.id.tvDetailAlamat);
+                tvDetailAlamat.setText(l.getAlamat());
                 //set Message
                 TextView tvDetailMessage = (TextView) dialog.findViewById(R.id.tvDetailMessage);
                 tvDetailMessage.setText("- "+l.getMessage()+" -");
@@ -247,9 +247,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                                             params.put("id", String.valueOf(l.getId()));
                                             params.put("lokasi", l.getLokasi());
                                             params.put("alamat", l.getAlamat());
-                                            params.put("latitude", String.valueOf(l.getLatitude()));
-                                            params.put("longitude", String.valueOf(l.getLongitude()));
-                                            params.put("radius", String.valueOf(l.getRadius()));
+                                            params.put("latitude", l.getLatitude().toString());
+                                            params.put("longitude", l.getLongitude().toString());
+                                            params.put("radius", Integer.toString(l.getRadius()));
                                             params.put("message", etMessage.getText().toString());
                                             params.put("wifi", strWifi);
                                             params.put("bluetooth", strBluetooth);

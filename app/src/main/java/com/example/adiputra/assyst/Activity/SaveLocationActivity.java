@@ -57,7 +57,7 @@ public class SaveLocationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strAudio = parent.getItemAtPosition(position).toString();
-                Toast.makeText(SaveLocationActivity.this, "Audio : "+strAudio, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SaveLocationActivity.this, "Audio : "+strAudio, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -68,7 +68,7 @@ public class SaveLocationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strWifi = parent.getItemAtPosition(position).toString();
-                Toast.makeText(SaveLocationActivity.this, "Wifi : "+strWifi, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SaveLocationActivity.this, "Wifi : "+strWifi, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -79,7 +79,7 @@ public class SaveLocationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strBluetooth = parent.getItemAtPosition(position).toString();
-                Toast.makeText(SaveLocationActivity.this, "Bluetooth : "+strBluetooth, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SaveLocationActivity.this, "Bluetooth : "+strBluetooth, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -90,7 +90,7 @@ public class SaveLocationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strMobileData = parent.getItemAtPosition(position).toString();
-                Toast.makeText(SaveLocationActivity.this, "Mobile Data : "+strMobileData, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SaveLocationActivity.this, "Mobile Data : "+strMobileData, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -101,7 +101,7 @@ public class SaveLocationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strAirPlane = parent.getItemAtPosition(position).toString();
-                Toast.makeText(SaveLocationActivity.this, "Air Plane : "+strAirPlane, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SaveLocationActivity.this, "Air Plane : "+strAirPlane, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}

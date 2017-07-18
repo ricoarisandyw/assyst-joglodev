@@ -186,62 +186,62 @@ public class MapFragment extends Fragment  {
                         }
 
                         //RUMUS
-                        double x1, x2, y1, y2;
-                        x1 = myLocation.getLatitude();
-                        y1 = myLocation.getLongitude();
-                        x2 = -7.276383; //lat PENS tujuan
-                        y2 = 112.795164; //long PENS tujuan
-                        googleMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(-7.276383, 112.795164))
-                                .title("PENS")
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                        double jarak = 1500;
-                        double R = 6372.8;
-                        double dLat = Math.toRadians(x2 - x1);
-                        double dLon = Math.toRadians(y2 - y1);
-                        x1 = Math.toRadians(x1);
-                        x2 = Math.toRadians(x2);
+//                        double x1, x2, y1, y2;
+//                        x1 = myLocation.getLatitude();
+//                        y1 = myLocation.getLongitude();
+//                        x2 = 500.0; //lat PENS tujuan-7.276383
+//                        y2 = 500.0; //long PENS tujuan112.795164
+//                        googleMap.addMarker(new MarkerOptions()
+//                                .position(new LatLng(-7.276383, 112.795164))
+//                                .title("PENS")
+//                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+//                        double jarak = 1500;
+//                        double R = 6372.8;
+//                        double dLat = Math.toRadians(x2 - x1);
+//                        double dLon = Math.toRadians(y2 - y1);
+//                        x1 = Math.toRadians(x1);
+//                        x2 = Math.toRadians(x2);
+//
+//                        double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(x1) * Math.cos(x2);
+//                        double c = 2 * Math.asin(Math.sqrt(a));
+//                        double result =  (R * c)*1000;
+//
+//                        Toast.makeText(getContext(), "My Location : "+
+//                                myLocation.getLatitude()+
+//                                "-"+myLocation.getLongitude()+
+//                                "\nJARAK : "+result+" meter", Toast.LENGTH_LONG).show();
 
-                        double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(x1) * Math.cos(x2);
-                        double c = 2 * Math.asin(Math.sqrt(a));
-                        double result =  (R * c)*1000;
-
-                        Toast.makeText(getContext(), "My Location : "+
-                                myLocation.getLatitude()+
-                                "-"+myLocation.getLongitude()+
-                                "\nJARAK : "+result+" meter", Toast.LENGTH_LONG).show();
-
-                        if(result <= jarak ){
-                            WifiManager wifi = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                            wifi.setWifiEnabled(true);
-                            BluetoothAdapter ba = BluetoothAdapter.getDefaultAdapter();
-                            ba.enable();
-                            AudioManager audio = (AudioManager) getActivity().getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-                            audio.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),Settings.Global.AIRPLANE_MODE_ON,1);
-
-                            Toast.makeText(getActivity(),"Anda Masuk Wilayah PENS",Toast.LENGTH_LONG).show();
-                            Notification notification = new NotificationCompat.Builder(getActivity())
-                                    .setTicker("joglo-developer")
-                                    .setSmallIcon(android.R.drawable.star_on)
-                                    .setContentTitle("Assyst-Notification")
-                                    .setContentText("Anda Masuk Wilayah PENS")
-                                    .setAutoCancel(true)
-                                    .build();
-                            NotificationManager notifier = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-                            notifier.notify(0, notification);
-                        }else{
-                            Notification notification = new NotificationCompat.Builder(getActivity())
-                                    .setTicker("joglo-developer")
-                                    .setSmallIcon(android.R.drawable.star_on)
-                                    .setContentTitle("Assyst-Notification")
-                                    .setContentText("Kamu Belum Sampai")
-                                    .setContentText("Kamu Belum Sampai "+n)
-                                    .setAutoCancel(true)
-                                    .build();
-                            NotificationManager notifier = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-                            notifier.notify(0, notification);
-                        }
+//                        if(result <= jarak ){
+//                            WifiManager wifi = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//                            wifi.setWifiEnabled(true);
+//                            BluetoothAdapter ba = BluetoothAdapter.getDefaultAdapter();
+//                            ba.enable();
+//                            AudioManager audio = (AudioManager) getActivity().getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+//                            audio.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+//                            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),Settings.Global.AIRPLANE_MODE_ON,1);
+//
+//                            Toast.makeText(getActivity(),"Anda Masuk Wilayah PENS",Toast.LENGTH_LONG).show();
+//                            Notification notification = new NotificationCompat.Builder(getActivity())
+//                                    .setTicker("joglo-developer")
+//                                    .setSmallIcon(android.R.drawable.star_on)
+//                                    .setContentTitle("Assyst-Notification")
+//                                    .setContentText("Anda Masuk Wilayah PENS")
+//                                    .setAutoCancel(true)
+//                                    .build();
+//                            NotificationManager notifier = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+//                            notifier.notify(0, notification);
+//                        }else{
+//                            Notification notification = new NotificationCompat.Builder(getActivity())
+//                                    .setTicker("joglo-developer")
+//                                    .setSmallIcon(android.R.drawable.star_on)
+//                                    .setContentTitle("Assyst-Notification")
+//                                    .setContentText("Kamu Belum Sampai")
+//                                    .setContentText("Kamu Belum Sampai "+n)
+//                                    .setAutoCancel(true)
+//                                    .build();
+//                            NotificationManager notifier = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+//                            notifier.notify(0, notification);
+//                        }
                     }
                 }
             }
