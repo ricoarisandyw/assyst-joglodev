@@ -122,6 +122,7 @@ public class SettingFragment extends Fragment {
         });
         btnChangeName = (Button) getActivity().findViewById(R.id.btnChangeName);
         tvDroidName = (TextView) getActivity().findViewById(R.id.tvDroidName);
+        tvDroidName.setText(loadData("droidNick"));
         btnChangeName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

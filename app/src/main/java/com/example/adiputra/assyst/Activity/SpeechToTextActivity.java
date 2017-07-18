@@ -3,9 +3,11 @@ package com.example.adiputra.assyst.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.ContactsContract;
@@ -25,10 +27,13 @@ import android.widget.Toast;
 import com.example.adiputra.assyst.Assyst;
 import com.example.adiputra.assyst.R;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
-public class SpeechToTextActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+import com.android.internal.telephony.*;
+public class SpeechToTextActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, TextToSpeech.OnUtteranceCompletedListener {
 
     private TextView txtSpeechInput;
     private ImageButton btnSpeak;
@@ -53,8 +58,6 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
         tts = new TextToSpeech(this, this);
         speakOut(messages);
         saveData("kontak", "");
-
-        promptSpeechInput();
 
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
         txtSpeechInput.setText("");
@@ -123,13 +126,17 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
 //                        promptSpeechInput();
 //                    }
                     String res = result.get(0).toLowerCase();
-                    if (res.contains("Bejo")) {
-                        res.replace("Bejo", "");
-                        String query = res;
-                        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                        intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
-                        intent.putExtra("query", query);
-                        startActivity(intent);
+                    if (res.contains("Bejo")||res.contains("bejo")) {
+                        res.replace("Bejo ", "");
+                        res.replace("bejo ", "");
+                        googleNow(res);
+                        res = "Google Start" + res;
+                    }else if(res.contains("yes")||res.contains("Yes")){
+
+                    }else if(res.contains("no")||res.contains("No")){
+
+                    }else{
+
                     }
                     txtSpeechInput.setText(result.get(0));
                 }
@@ -142,9 +149,8 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
     public void onInit(int status) {
         Log.e("TTS", "Start TTS");
         if (status == TextToSpeech.SUCCESS) {
-
+            tts.setOnUtteranceCompletedListener(this);
             int result = tts.setLanguage(Locale.US);
-
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
@@ -160,17 +166,24 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
     }
 
     private void speakOut(String text) {
-        if (text.contains("Code001")) {
-            text.replace("Code001", "");
-            text = "You ,got, called, from " + text;
-        } else if (text.contains("Code002")) {
-            text.replace("Code002", "");
-            text = "You got message that said " + text;
-        } else {
-            text = "You got unknown data format " + text;
-        }
+        if(text != null) {
+            if (text.contains("Code001")) {
+                text.replace("Code001", "");
+                text = "You ,got, called, from " + text;
+            } else if (text.contains("Code002")) {
+                text.replace("Code002", "");
+                text = "You got message that said " + text;
+            } else {
+                text = "";
+            }
 
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            HashMap<String, String> myHashAlarm = new HashMap<String, String>();
+            myHashAlarm.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_ALARM));
+            myHashAlarm.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "SOME MESSAGE");
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, myHashAlarm);
+        }
+        deleteData();
     }
 
     PhoneStateListener phoneStateListener = new PhoneStateListener() {
@@ -205,7 +218,7 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
     public void deleteData() {
         SharedPreferences prefs = getSharedPreferences("UserData", 0);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("username", "");
+        editor.putString("kontak", "");
         Log.d("Hapus Data:", "");
         editor.commit();
     }
@@ -265,5 +278,18 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
 //            }, 500);
         }
         return "No One has this contact";
+    }
+
+    @Override
+    public void onUtteranceCompleted(String utteranceId) {
+        this.promptSpeechInput();
+    }
+
+    public void googleNow(String res){
+        String query = res;
+        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+        intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
+        intent.putExtra("query", query);
+        startActivity(intent);
     }
 }
