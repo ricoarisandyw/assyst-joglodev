@@ -39,7 +39,7 @@ public class IncomingSms extends BroadcastReceiver {
                     Log.d("Pesan", messages[0].getMessageBody());
                     Intent i = new Intent(context, SpeechToTextActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    saveData("kontak", "Code002"+messages[0].getMessageBody());
+                    saveData("kontak", "Code002 "+messages[0].getMessageBody());
                     context.startActivity(i);
                 }
             }

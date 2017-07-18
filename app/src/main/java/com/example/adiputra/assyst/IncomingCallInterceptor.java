@@ -42,7 +42,7 @@ public class IncomingCallInterceptor extends BroadcastReceiver{
             coni = context;
             Intent i = new Intent(context, SpeechToTextActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            saveData("kontak","Code001"+incomingNumber);
+            saveData("kontak","Code001 "+incomingNumber);
             context.startActivity(i);
         }
     }
