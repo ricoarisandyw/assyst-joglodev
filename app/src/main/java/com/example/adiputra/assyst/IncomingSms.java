@@ -25,7 +25,7 @@ public class IncomingSms extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "Intent recieved: " + intent.getAction());
+        Log.i(TAG, "Intent Recieved: " + intent.getAction());
         coni = context;
         if (intent.getAction().equals(SMS_RECEIVED)) {
             Bundle bundle = intent.getExtras();
