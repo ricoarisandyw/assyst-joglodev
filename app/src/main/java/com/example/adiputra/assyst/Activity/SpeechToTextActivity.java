@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adiputra.assyst.Assyst;
+//import com.example.adiputra.assyst.Assyst;
 import com.example.adiputra.assyst.R;
 
 import java.lang.reflect.Method;
@@ -42,7 +42,7 @@ public class SpeechToTextActivity extends AppCompatActivity implements TextToSpe
     private TextToSpeech tts;
     String messages;
     String s;
-    Assyst assyst = new Assyst();
+//    Assyst assyst = new Assyst();
 
     ArrayList<String> contactList;
     Cursor cursor;

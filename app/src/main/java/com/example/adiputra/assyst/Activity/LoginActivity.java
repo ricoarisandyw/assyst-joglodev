@@ -16,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.adiputra.assyst.Assyst;
 import com.example.adiputra.assyst.Model.User;
 import com.example.adiputra.assyst.R;
 import com.google.gson.Gson;
@@ -35,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etPass;
     private RequestQueue requestQueue;
     private Gson gson;
-    Assyst assyst = new Assyst();
+    //Assyst assyst = new Assyst();
     List<User> userList = new ArrayList<>();
 
     @Override

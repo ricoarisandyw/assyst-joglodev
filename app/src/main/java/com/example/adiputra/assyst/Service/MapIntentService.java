@@ -4,12 +4,16 @@ import android.Manifest;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.AudioManager;
+import android.net.wifi.WifiManager;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
@@ -49,6 +53,10 @@ public class MapIntentService extends IntentService {
     private String[] blue = new String[100];
     private String[] air = new String[100];
     private String[] mob = new String[100];
+
+    //SYSTEM
+    private AudioManager myAudioManager;
+    private BluetoothAdapter BA;
 
     public MapIntentService() {
         super("MapIntentService");
@@ -163,6 +171,44 @@ public class MapIntentService extends IntentService {
                             double result =  (R * c)*1000;
                             Log.i("SERVICE COUNT LOC : ", loc[i]+" : "+jarak+" : "+result);
                             if(result <= jarak ){
+
+                                //AUDIO
+                                if(audio[i].equals("MUTE")){
+                                    myAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                                }else if(audio[i].equals("SOUND")){
+                                    myAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                                }else {
+                                    myAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                                }
+
+                                //WIFI
+                                if(wifi[i].equals("ON")){
+                                    WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                                    wifi.setWifiEnabled(true);
+                                }else{
+                                    WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                                    wifi.setWifiEnabled(false);
+                                }
+
+                                //Bluetooth
+                                if(blue[i].equals("ON")){
+                                    BA = BluetoothAdapter.getDefaultAdapter();
+                                    BA.enable();
+                                }else{
+                                    BA = BluetoothAdapter.getDefaultAdapter();
+                                    BA.disable();
+                                }
+
+                                //AirPlane
+                                if(air[i].equals("ON")){
+                                    Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+                                }else{
+                                    Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+                                }
+
                                 //Toast.makeText(this, "Anda Masuk Wilayah "+loc[i],Toast.LENGTH_LONG).show();
                                 Notification notification = new NotificationCompat.Builder(this)
                                         //.setTicker("joglo-developer")

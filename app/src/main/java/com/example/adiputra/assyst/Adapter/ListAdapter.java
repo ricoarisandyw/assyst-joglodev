@@ -111,7 +111,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                                 switch (which) {
                                     case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
                                         try {
-                                            String DELETE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/delete_location ";
+                                            String DELETE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/delete_location";
                                             StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_LOCATION,
                                                     new Response.Listener<String>() {
                                                         @Override
