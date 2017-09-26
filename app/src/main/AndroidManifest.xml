@@ -78,9 +78,21 @@
         <activity android:name=".Activity.SpeechToTextActivity" />
         <activity android:name=".Activity.TextToSpeechActivity" />
         <activity android:name=".TestLocationActivity" />
-        <activity android:name=".Activity.LoginActivity" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.whonumberActivity" />
-        <activity android:name=".Activity.SignUpActivity" />
+        <activity
+            android:name=".Activity.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
 
         <service
             android:name=".Service.MapIntentService"
@@ -91,11 +103,6 @@
             android:name=".Activity.ListActivity"
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.MapActivity"

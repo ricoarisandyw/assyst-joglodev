@@ -178,7 +178,7 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
                     if(myLocation!=null){
                         LatLng userLocation = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 8));
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 7), 1500, null);
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10), 1500, null);
 
                         for(int i = 0; i <  n; ++i){
                             coordinates.add(new LatLng(lat[i], lng[i]));

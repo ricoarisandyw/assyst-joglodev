@@ -36,27 +36,19 @@ public class SignUpActivity extends AppCompatActivity {
     private ProgressDialog progress;
     private RequestQueue requestQueue;
     private Gson gson;
-    Spinner gSpinner;
-    private DatePicker datePicker;
-    private Calendar calendar;
-    private TextView dateView;
-    private int year, month, day;
-    EditText etNama, etPass, etEmail;
-    Button showDateBtn;
+    EditText etNama, etPass, etEmail, etConfirmPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
-        etNama = (EditText) findViewById(R.id.etSignName);
-        etPass = (EditText) findViewById(R.id.etSignPass);
-        etEmail = (EditText) findViewById(R.id.etSignEmail);
-        gSpinner = (Spinner) findViewById(R.id.spinnerGender);
-        dateView = (TextView) findViewById(R.id.tvDate);
-        showDateBtn = (Button) findViewById(R.id.btnGetDate);
-        Button btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        etNama = (EditText) findViewById(R.id.idUsername);
+        etPass = (EditText) findViewById(R.id.idPassword);
+        etConfirmPass = (EditText) findViewById(R.id.idConfirmPassword);
+        etEmail = (EditText) findViewById(R.id.idEmail);
+        Button btnSignUp = (Button) findViewById(R.id.btnToSignUp);
+        Button btnLogin = (Button) findViewById(R.id.btnLogin);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -73,32 +65,38 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Male");
-        categories.add("Female");
-        categories.add("Others");
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
-        gSpinner.setAdapter(dataAdapter);
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        showDate(year, month+1, day);
-
-        showDateBtn.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
-                showDialog(999);
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
+
+//        // Spinner Drop down elements
+//        List<String> categories = new ArrayList<String>();
+//        categories.add("Male");
+//        categories.add("Female");
+//        categories.add("Others");
+//
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+//
+//        // Drop down layout style - list view with radio button
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // attaching data adapter to spinner
+//        calendar = Calendar.getInstance();
+//        year = calendar.get(Calendar.YEAR);
+//
+//        month = calendar.get(Calendar.MONTH);
+//        day = calendar.get(Calendar.DAY_OF_MONTH);
+//        showDate(year, month+1, day);
+//
+//        showDateBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                showDialog(999);
+//            }
+//        });
 
         requestQueue = Volley.newRequestQueue(SignUpActivity.this);
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -106,44 +104,42 @@ public class SignUpActivity extends AppCompatActivity {
         gson = gsonBuilder.create();
     }
 
-    @SuppressWarnings("deprecation")
-    public void setDate(View view) {
-        showDialog(999);
-        Toast.makeText(getApplicationContext(), "ca",
-                Toast.LENGTH_SHORT)
-                .show();
-    }
+//    @SuppressWarnings("deprecation")
+//    public void setDate(View view) {
+//        showDialog(999);
+//        Toast.makeText(getApplicationContext(), "ca",
+//                Toast.LENGTH_SHORT)
+//                .show();
+//    }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
-        if (id == 999) {
-            return new DatePickerDialog(this,
-                    myDateListener, year, month, day);
-        }
-        return null;
-    }
+//    @Override
+//    protected Dialog onCreateDialog(int id) {
+//        // TODO Auto-generated method stub
+//        if (id == 999) {
+//            return new DatePickerDialog(this,
+//                    myDateListener, year, month, day);
+//        }
+//        return null;
+//    }
 
-    private DatePickerDialog.OnDateSetListener myDateListener = new
-            DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker arg0,
-                                      int arg1, int arg2, int arg3) {
-                    showDate(arg1, arg2+1, arg3);
-                }
-            };
-
-    private void showDate(int year, int month, int day) {
-        dateView.setText(new StringBuilder().append(year).append("-")
-                .append(month).append("-").append(day));
-    }
+//    private DatePickerDialog.OnDateSetListener myDateListener = new
+//            DatePickerDialog.OnDateSetListener() {
+//                @Override
+//                public void onDateSet(DatePicker arg0,
+//                                      int arg1, int arg2, int arg3) {
+//                    showDate(arg1, arg2+1, arg3);
+//                }
+//            };
+//
+//    private void showDate(int year, int month, int day) {
+////        dateView.setText(new StringBuilder().append(year).append("-")
+////                .append(month).append("-").append(day));
+//    }
 
     private void postData(){
         final String nama = etNama.getText().toString().trim();
         final String email = etEmail.getText().toString().trim();
         final String password = etPass.getText().toString().trim();
-        final String birthday = dateView.getText().toString().trim();
-        final String gender = gSpinner.getSelectedItem().toString().trim();
         final String phone = "081081081081";
         String INPUT_PESANAN_URL = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/create_user";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, INPUT_PESANAN_URL,
@@ -167,8 +163,6 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("email",email);
                 params.put("username",nama);
                 params.put("password",password);
-                params.put("birthday",birthday);
-                params.put("gender",gender);
                 params.put("phone",phone);
                 return params;
             }

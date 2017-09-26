@@ -64,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
         Button btnSignUp = (Button) findViewById(R.id.btnToSignUp);
-        etPass = (EditText) findViewById(R.id.passText);
-        etName = (EditText) findViewById(R.id.nameText);
+        etPass = (EditText) findViewById(R.id.idPassword);
+        etName = (EditText) findViewById(R.id.idUsername);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(cekLog(etName.getText().toString(),etPass.getText().toString())){
                     saveData("username", etName.getText().toString());//!!!
                     saveData("password", etPass.getText().toString());
-                    startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                    startActivity(new Intent(LoginActivity.this, ListActivity.class));
                 }else{
                     Toast.makeText(LoginActivity.this, "Username/Password Salah", Toast.LENGTH_SHORT).show();
                 }

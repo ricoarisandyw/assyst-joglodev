@@ -1,112 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
+    android:background="@drawable/bg_login"
     tools:context="com.example.adiputra.assyst.Activity.LoginActivity">
+
     <LinearLayout
-        android:layout_width="268dp"
-        android:layout_height="551dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="@dimen/_30sdp"
         android:gravity="center"
         android:weightSum="1">
 
-        <TextView
-            android:id="@+id/textSignUp"
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/idTIL1"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="-30dp"
-            android:gravity="center"
-            android:text="Sign Up"
-            android:textSize="30dp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textEmail"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/idEmail"
+                android:hint="Email"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#FFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/idTIL1"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etSignEmail"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/idUsername"
+                android:hint="Username"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#FFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/idTL2"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/idTIL1"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textUsername"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/idPassword"
+                android:hint="Password"
+                android:backgroundTint="#FFF"
+                android:inputType="textPassword"
+                android:layout_below="@+id/idUsername"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/idTL2"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/idTIL1"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Username" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etSignName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/idConfirmPassword"
+                android:hint="ConfirmPassword"
+                android:backgroundTint="#FFF"
+                android:inputType="textPassword"
+                android:layout_below="@+id/idUsername"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password" />
-
-        <EditText
-            android:id="@+id/etSignPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gender" />
-
-        <android.support.v7.widget.AppCompatSpinner
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerGender"
-            android:layout_below="@+id/tvKategori"
-            >
-        </android.support.v7.widget.AppCompatSpinner>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BirthDay" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            >
-            <Button
-                android:id="@+id/btnGetDate"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Get Date" />
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:gravity="center_vertical"
-                android:text="01/01/1980" />
-
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnToSignUp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/round_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:text="SIGN UP" />
+
+        <Button
+            android:id="@+id/btnLogin"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Sign Up" />
+            android:background="@drawable/round_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:text="LOGIN" />
+
     </LinearLayout>
 </LinearLayout>

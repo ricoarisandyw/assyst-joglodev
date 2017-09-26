@@ -1,56 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_login"
     android:gravity="center"
     tools:context="com.example.adiputra.assyst.Activity.LoginActivity">
+
     <LinearLayout
-        android:layout_width="268dp"
-        android:layout_height="551dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="@dimen/_30sdp"
         android:gravity="center"
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/textView3"
+            android:textColor="#FFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="-30dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="Login"
+            android:text="LOGO ASSYST"
             android:textSize="30dp" />
 
-        <TextView
-            android:id="@+id/textView"
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="@dimen/_120sdp"
+            android:id="@+id/idTIL1"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email/username" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/nameText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/idUsername"
+                android:hint="Username"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#FFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/passText"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/idTL2"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/idTIL1"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/idPassword"
+                android:hint="Password"
+                android:backgroundTint="#FFF"
+                android:inputType="textPassword"
+                android:layout_below="@+id/idUsername"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btnLogin"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/round_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -58,8 +76,11 @@
 
         <Button
             android:id="@+id/btnToSignUp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/round_button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#FFF"
             android:textStyle="bold"
             android:text="SIGN UP" />
 
