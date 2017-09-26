@@ -1,5 +1,6 @@
 package com.example.adiputra.assyst.Adapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,14 +30,22 @@ import com.example.adiputra.assyst.Model.ListLocation;
 import com.example.adiputra.assyst.R;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
-    private java.util.List listData;
-    final Context context;
+    private java.util.List<ListLocation> listData;
     private RequestQueue requestQueue;
+    private Context context;
     String strAudio, strWifi, strAirPlane, strBluetooth, strMobileData, strMessage2;
+    Activity mActivity = null;
+
+    public ListAdapter(List<ListLocation> listData, Context context) {
+        super();
+        this.listData = listData;
+        this.context = context;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView id, lokasi, alamat;
@@ -47,11 +56,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             lokasi = (TextView) view.findViewById(R.id.lokasi);
             alamat = (TextView) view.findViewById(R.id.alamat);
         }
-    }
-
-    public ListAdapter(java.util.List listData, Context context) {
-        this.listData = listData;
-        this.context = context;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         requestQueue = Volley.newRequestQueue(context);
 
         //tambah (ListLocation)
-        final ListLocation l = (ListLocation) listData.get(position);
+        final ListLocation l = listData.get(position);
         //test
         holder.lokasi.setText(l.getLokasi());
         holder.alamat.setText(l.getAlamat());
@@ -74,7 +78,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             @Override
             public void onClick(final View v) {
                 Toast.makeText(context, ""+l.getLokasi(), Toast.LENGTH_SHORT).show();
-                final Dialog dialog = new Dialog(context);
+                final Dialog dialog = new Dialog(v.getRootView().getContext());
                 dialog.setContentView(R.layout.activity_detail);
                 dialog.setTitle(l.getLokasi());
                 //set ID
@@ -144,7 +148,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                             }
                         };
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
                         builder.setMessage("Are you sure delete ?")
                                 .setPositiveButton("Yes", dialogClickListener)
                                 .setNegativeButton("No", dialogClickListener)
@@ -158,7 +162,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                     @Override
                     public void onClick(View v) {
                         //Toast.makeText(context, "Go to edit", Toast.LENGTH_SHORT).show();
-                        final Dialog dialogEdit = new Dialog(context);
+                        final Dialog dialogEdit = new Dialog(v.getRootView().getContext());
                         dialogEdit.setContentView(R.layout.activity_edit);
                         dialogEdit.setTitle("Edit Configuration");
                         //editText Message 11

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.adiputra.assyst.Fragment.ListFragment;
 import com.example.adiputra.assyst.Fragment.MapFragment;
 import com.example.adiputra.assyst.R;
 import com.example.adiputra.assyst.Fragment.SettingFragment;
@@ -31,7 +30,7 @@ public class MenuActivity extends AppCompatActivity {
 
         //Load pertama pada tab
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.listFragment,new ListFragment());
+//        ft.replace(R.id.listFragment,new ListFragment());
         ft.commit();
 
         tab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -40,7 +39,7 @@ public class MenuActivity extends AppCompatActivity {
                 if(tab.getPosition()==0){
                     //intent ke ListFragment
                     android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.listFragment,new ListFragment());
+//                    ft.replace(R.id.listFragment,new ListFragment());
                     ft.addToBackStack(null);
                     ft.commit();
                 }else if(tab.getPosition()==1){
