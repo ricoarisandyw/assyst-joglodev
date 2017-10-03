@@ -37,6 +37,7 @@
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/idUsername"
                 android:hint="Username"
+                android:textColor="#FFF"
                 android:layout_marginTop="50dp"
                 android:backgroundTint="#FFF"
                 android:layout_width="match_parent"
@@ -57,6 +58,7 @@
                 android:id="@+id/idPassword"
                 android:hint="Password"
                 android:backgroundTint="#FFF"
+                android:textColor="#FFF"
                 android:inputType="textPassword"
                 android:layout_below="@+id/idUsername"
                 android:layout_marginTop="5dp"

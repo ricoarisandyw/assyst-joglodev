@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.adiputra.assyst.Activity.MenuActivity;
-import com.example.adiputra.assyst.Activity.SaveLocationActivity;
-import com.example.adiputra.assyst.Model.ListLocation;
+import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.R;
 
 import java.util.HashMap;
@@ -35,13 +32,13 @@ import java.util.Map;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
-    private java.util.List<ListLocation> listData;
+    private java.util.List<Configure> listData;
     private RequestQueue requestQueue;
     private Context context;
     String strAudio, strWifi, strAirPlane, strBluetooth, strMobileData, strMessage2;
     Activity mActivity = null;
 
-    public ListAdapter(List<ListLocation> listData, Context context) {
+    public ListAdapter(List<Configure> listData, Context context) {
         super();
         this.listData = listData;
         this.context = context;
@@ -49,12 +46,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView id, lokasi, alamat;
+        public CardView cvList;
+        public View vList;
 
         public MyViewHolder(View view) {
             super(view);
             //id = (TextView) view.findViewById(R.id.id);
             lokasi = (TextView) view.findViewById(R.id.lokasi);
             alamat = (TextView) view.findViewById(R.id.alamat);
+            cvList = (CardView) view.findViewById(R.id.cvList);
+            vList = (View) view.findViewById(R.id.vList);
         }
     }
 
@@ -69,12 +70,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         requestQueue = Volley.newRequestQueue(context);
 
-        //tambah (ListLocation)
-        final ListLocation l = listData.get(position);
+        //tambah (Configure)
+        final Configure l = listData.get(position);
         //test
         holder.lokasi.setText(l.getLokasi());
         holder.alamat.setText(l.getAlamat());
-        holder.alamat.setOnClickListener(new View.OnClickListener() {
+        holder.cvList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 Toast.makeText(context, ""+l.getLokasi(), Toast.LENGTH_SHORT).show();
@@ -106,7 +107,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 TextView tvDetailMobileData = (TextView) dialog.findViewById(R.id.tvDetailMobileData);
                 tvDetailMobileData.setText(l.getMobile_data());
                 //set btnDelete
-                ImageButton dialogBtnDelete = (ImageButton) dialog.findViewById(R.id.btnDetailDelete);
+                //ImageButton dialogBtnDelete = (ImageButton) dialog.findViewById(R.id.btnDetailDelete);
+                Button dialogBtnDelete = (Button) dialog.findViewById(R.id.btnDetailDelete);
                 dialogBtnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -117,18 +119,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                                         try {
                                             String DELETE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/delete_location";
                                             StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_LOCATION,
-                                                    new Response.Listener<String>() {
-                                                        @Override
-                                                        public void onResponse(String response) {
-                                                            Toast.makeText(context, "Data Deleted", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    },
-                                                    new Response.ErrorListener() {
-                                                        @Override
-                                                        public void onErrorResponse(VolleyError error) {
-                                                            Toast.makeText(context,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }){
+                                                new Response.Listener<String>() {
+                                                    @Override
+                                                    public void onResponse(String response) {
+                                                        Toast.makeText(context, "Data Deleted", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                },
+                                                new Response.ErrorListener() {
+                                                    @Override
+                                                    public void onErrorResponse(VolleyError error) {
+                                                        Toast.makeText(context,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
+                                                    }
+                                                }){
                                                 @Override
                                                 protected Map<String,String> getParams(){
                                                     Map<String,String> params = new HashMap<String, String>();
@@ -148,16 +150,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                             }
                         };
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
-                        builder.setMessage("Are you sure delete ?")
-                                .setPositiveButton("Yes", dialogClickListener)
-                                .setNegativeButton("No", dialogClickListener)
-                                .show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("DELETE DATA");
+                        builder.setMessage("Are you sure delete ?");
+                        builder.setPositiveButton("Yes", dialogClickListener);
+                        builder.setNegativeButton("No", dialogClickListener);
+                        builder.show();
                     }
                 });
 
                 //set btnEdit
-                ImageButton btnEdit = (ImageButton) dialog.findViewById(R.id.btnDetailEdit);
+                //ImageButton btnEdit = (ImageButton) dialog.findViewById(R.id.btnDetailEdit);
+                Button btnEdit = (Button) dialog.findViewById(R.id.btnDetailEdit);
                 btnEdit.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
@@ -274,13 +278,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 });
 
                 //set btnDismiss
-                Button dialogBtn = (Button) dialog.findViewById(R.id.btnDetailDismiss);
-                dialogBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+//                Button dialogBtn = (Button) dialog.findViewById(R.id.btnDetailDismiss);
+//                dialogBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
                 dialog.show();
             }
         });

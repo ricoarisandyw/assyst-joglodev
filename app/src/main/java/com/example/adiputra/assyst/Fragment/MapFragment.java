@@ -1,22 +1,15 @@
 package com.example.adiputra.assyst.Fragment;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.media.AudioManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Activity.SaveLocationActivity;
-import com.example.adiputra.assyst.Model.ListLocation;
+import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.R;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
@@ -47,7 +39,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,8 +46,6 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -102,9 +91,9 @@ public class MapFragment extends Fragment  {
                         try{
                             //Log.i("Response : ", response);
                             //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
-                            List<ListLocation> posts = Arrays.asList(gson.fromJson(response, ListLocation[].class));
+                            List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
                             int i=0;
-                            for (ListLocation post : posts) {
+                            for (Configure post : posts) {
                                 n = n+1;
                                 loc[i] = post.getLokasi();
                                 lat[i] = post.getLatitude();

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp">
+    android:padding="5dp">
 
     <TextView
         android:visibility="gone"
@@ -15,6 +15,7 @@
 
     <TextView
         android:id="@+id/tvDetailAlamat"
+        android:text="Jln. Soekarno - Hatta"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="#000"
@@ -25,6 +26,7 @@
 
     <TextView
         android:id="@+id/tvDetailMessage"
+        android:text="- pesan dari kami -"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="#85CD00"
@@ -124,39 +126,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageButton
-        android:id="@+id/btnDetailDelete"
-        android:layout_below="@+id/tvDetailMobileData"
-        android:textStyle="bold"
-        android:src="@drawable/ic_delete_black_24dp"
-        android:textColor="#FFF"
-        android:background="@color/red"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/btnDetailDelete"-->
+        <!--android:layout_below="@+id/tvDetailMobileData"-->
+        <!--android:textStyle="bold"-->
+        <!--android:src="@drawable/ic_delete_black_24dp"-->
+        <!--android:textColor="#FFF"-->
+        <!--android:background="@color/red"-->
+        <!--android:layout_marginRight="@dimen/_10sdp"-->
+        <!--android:layout_width="@dimen/_50sdp"-->
+        <!--android:layout_height="@dimen/_50sdp" />-->
 
-    <ImageButton
-        android:id="@+id/btnDetailEdit"
-        android:layout_toRightOf="@+id/btnDetailDelete"
-        android:layout_below="@+id/tvDetailMobileData"
-        android:textStyle="bold"
-        android:src="@drawable/ic_edit_black_24dp"
-        android:textColor="#FFF"
-        android:background="#87CEEB"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/btnDetailEdit"-->
+        <!--android:layout_toRightOf="@+id/btnDetailDelete"-->
+        <!--android:layout_below="@+id/tvDetailMobileData"-->
+        <!--android:textStyle="bold"-->
+        <!--android:src="@drawable/ic_edit_black_24dp"-->
+        <!--android:textColor="#FFF"-->
+        <!--android:background="#87CEEB"-->
+        <!--android:layout_marginRight="@dimen/_10sdp"-->
+        <!--android:layout_width="@dimen/_50sdp"-->
+        <!--android:layout_height="@dimen/_50sdp" />-->
 
-    <Button
-        android:id="@+id/btnDetailDismiss"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvDetailMobileData"
-        android:layout_toRightOf="@+id/btnDetailEdit"
-        android:text="OK"
-        android:textStyle="bold"
-        android:textColor="#FFF"
-        android:background="#85CD00"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_50sdp" />
+    <TableLayout
+        android:id="@+id/tbl"
+        android:layout_below="@id/tvDetailMobileData"
+        android:stretchColumns="0,1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+            <Button
+                android:id="@+id/btnDetailDelete"
+                android:padding="0dp"
+                android:elevation="0dp"
+                android:backgroundTint="#f44336"
+                android:clickable="true"
+                android:text="DELETE"
+                android:textColor="#FFF"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50sdp">
+            </Button>
+            <Button
+                android:id="@+id/btnDetailEdit"
+                android:padding="0dp"
+                android:elevation="0dp"
+                android:backgroundTint="#87CEEB"
+                android:clickable="true"
+                android:text="EDIT"
+                android:textColor="#FFF"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+            </Button>
+        </TableRow>
+    </TableLayout>
+
+    <!--<Button-->
+        <!--android:id="@+id/btnDetailDismiss"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/tvDetailMobileData"-->
+        <!--android:layout_toRightOf="@+id/btnDetailEdit"-->
+        <!--android:text="OK"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="#FFF"-->
+        <!--android:background="#85CD00"-->
+        <!--android:layout_width="@dimen/_150sdp"-->
+        <!--android:layout_height="@dimen/_50sdp" />-->
 
 </RelativeLayout>

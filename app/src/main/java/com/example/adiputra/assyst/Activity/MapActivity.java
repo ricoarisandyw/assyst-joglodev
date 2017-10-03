@@ -1,8 +1,6 @@
 package com.example.adiputra.assyst.Activity;
 
 import android.Manifest;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,16 +27,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.adiputra.assyst.Fragment.SearchFragment;
-import com.example.adiputra.assyst.Model.ListLocation;
+import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.R;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -115,9 +110,9 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
                         try{
                             //Log.i("Response : ", response);
                             //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
-                            List<ListLocation> posts = Arrays.asList(gson.fromJson(response, ListLocation[].class));
+                            List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
                             int i=0;
-                            for (ListLocation post : posts) {
+                            for (Configure post : posts) {
                                 n = n+1;
                                 loc[i] = post.getLokasi();
                                 lat[i] = post.getLatitude();

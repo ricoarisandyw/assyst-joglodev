@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,24 +23,30 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Adapter.ListAdapter;
-import com.example.adiputra.assyst.Model.ListLocation;
+import com.example.adiputra.assyst.Helper.SharedPref;
+import com.example.adiputra.assyst.Model.Configure;
+import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
-
+    SharedPref sharedPref = new SharedPref(this);
     private RecyclerView recyclerView;
-    private List<ListLocation> listData = new ArrayList<>();
+    private List<Configure> listData = new ArrayList<>();
     private ListAdapter mAdapter;
-
     //defineDatabaseContext
     Context context;
-
     //parse json
     private RequestQueue requestQueue;
     private Gson gson;
@@ -54,7 +58,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Assyst");
+        toolbar.setTitle("List Configure");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,22 +77,30 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue = Volley.newRequestQueue(ListActivity.this);
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         gson = gsonBuilder.create();
-
-        String GETLOC = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/show_location";
-        StringRequest req = new StringRequest(Request.Method.POST, GETLOC,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            Log.i("Response : ", response);
-                            //Toast.makeText(CTX, response, Toast.LENGTH_SHORT).show();
-                            List<ListLocation> posts = Arrays.asList(gson.fromJson(response, ListLocation[].class));
-                            for (ListLocation post : posts) {
-                                listData.add(new ListLocation(
+        String id = sharedPref.loadData("id");
+        String token = sharedPref.loadData("token");
+        Toast.makeText(ListActivity.this, "id : "+id+"\ntoken : "+token, Toast.LENGTH_SHORT).show();
+        String GETLOC = "http://api.atrama-studio.com/backend/web/api-configure?user_id="+id+"&access-token="+token;
+        StringRequest req = new StringRequest(Request.Method.GET, GETLOC,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try{
+                        Result result = gson.fromJson(response, Result.class);
+                        Log.i("Response : ", response);
+                        Log.i("Response : ", String.valueOf(result.isResult()));
+                        if(result.isResult()==true){
+                            Toast.makeText(ListActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                            JsonParser jsonParser = new JsonParser();
+                            JsonObject jo = (JsonObject)jsonParser.parse(response);
+                            JsonArray jsonArr = jo.getAsJsonArray("configureData");
+                            List<Configure> configures = Arrays.asList(gson.fromJson(jsonArr, Configure[].class));
+                            for (Configure post : configures) {
+                                listData.add(new Configure(
                                     post.getId(),
                                     post.getLokasi(),
                                     post.getAlamat(),
@@ -101,17 +113,21 @@ public class ListActivity extends AppCompatActivity {
                                 ));
                             }
                             mAdapter.notifyDataSetChanged();
-                        }catch(Exception e){
-                            e.printStackTrace();
+                        }else{
+                            Toast.makeText(ListActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Get Data : ", error.toString());
+                    }catch(Exception e){
+                        e.printStackTrace();
                     }
                 }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Get Data : ", error.toString());
+                    Toast.makeText(ListActivity.this, "Cek Internet Connection!", Toast.LENGTH_SHORT).show();
+                }
+            }
         );
         requestQueue.add(req);
     }
@@ -126,15 +142,14 @@ public class ListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_refresh was selected
             case R.id.action_refresh:
-                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT).show();
                 break;
-            // action with ID action_settings was selected
+            case R.id.action_profil:
+                Toast.makeText(this, "Profil selected", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

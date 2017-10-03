@@ -5,16 +5,20 @@ package com.example.adiputra.assyst.Model;
  */
 
 public class User {
+    private int id;
     private String username;
     private String email;
     private String password;
-    private String phone;
+    private String no_tlp;
+    private String token;
 
-    public User(String username, String email, String password, String phone) {
-        this.phone = phone;
+    public User(int id, String username, String email, String password, String no_tlp, String token) {
+        this.id = id;
+        this.no_tlp = no_tlp;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.token = token;
     }
 
     public String getUsername() {
@@ -41,11 +45,31 @@ public class User {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getNo_tlp() {
+        return no_tlp;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.no_tlp = no_tlp;
+    }
+
+    public void setNo_tlp(String no_tlp) {
+        this.no_tlp = no_tlp;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

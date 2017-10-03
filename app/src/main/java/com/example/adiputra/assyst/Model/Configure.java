@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ListLocation {
+public class Configure {
     //@SerializedName("id")
     private int id;
     //@SerializedName("lokasi")
@@ -30,8 +30,8 @@ public class ListLocation {
     //@SerializedName("mobile_data")
     private String mobile_data;
 
-    public ListLocation(int id, String lokasi, String alamat, float latitude, float longitude, int radius, String message,
-                        String wifi, String bluetooth, String audio, String air_plane, String mobile_data) {
+    public Configure(int id, String lokasi, String alamat, float latitude, float longitude, int radius, String message,
+                     String wifi, String bluetooth, String audio, String air_plane, String mobile_data) {
         this.setId(id);
         this.setLokasi(lokasi);
         this.setAlamat(alamat);
@@ -46,8 +46,8 @@ public class ListLocation {
         this.setMobile_data(mobile_data);
     }
 
-    public ListLocation(int id, String lokasi, String alamat, String message, String wifi,
-                        String bluetooth, String audio, String air_plane, String mobile_data) {
+    public Configure(int id, String lokasi, String alamat, String message, String wifi,
+                     String bluetooth, String audio, String air_plane, String mobile_data) {
         this.setId(id);
         this.setLokasi(lokasi);
         this.setAlamat(alamat);
@@ -161,6 +161,6 @@ public class ListLocation {
 //    }
 //
     public class ListLoc {
-        public List<ListLocation> ll;
+        public List<Configure> ll;
     }
 }

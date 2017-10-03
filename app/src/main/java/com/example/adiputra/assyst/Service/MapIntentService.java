@@ -26,10 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.adiputra.assyst.Model.ListLocation;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.example.adiputra.assyst.Model.Configure;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -76,9 +74,9 @@ public class MapIntentService extends IntentService {
                     @Override
                     public void onResponse(String response) {
                         try{
-                            List<ListLocation> posts = Arrays.asList(gson.fromJson(response, ListLocation[].class));
+                            List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
                             int i=0;
-                            for (ListLocation post : posts) {
+                            for (Configure post : posts) {
                                 n = n+1;
                                 loc[i] = post.getLokasi();
                                 lat[i] = post.getLatitude();
