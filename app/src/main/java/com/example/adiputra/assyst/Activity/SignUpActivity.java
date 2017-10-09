@@ -72,69 +72,12 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-//        // Spinner Drop down elements
-//        List<String> categories = new ArrayList<String>();
-//        categories.add("Male");
-//        categories.add("Female");
-//        categories.add("Others");
-//
-//        // Creating adapter for spinner
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-//
-//        // Drop down layout style - list view with radio button
-//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        // attaching data adapter to spinner
-//        calendar = Calendar.getInstance();
-//        year = calendar.get(Calendar.YEAR);
-//
-//        month = calendar.get(Calendar.MONTH);
-//        day = calendar.get(Calendar.DAY_OF_MONTH);
-//        showDate(year, month+1, day);
-//
-//        showDateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                showDialog(999);
-//            }
-//        });
 
         requestQueue = Volley.newRequestQueue(SignUpActivity.this);
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         gson = gsonBuilder.create();
     }
-
-//    @SuppressWarnings("deprecation")
-//    public void setDate(View view) {
-//        showDialog(999);
-//        Toast.makeText(getApplicationContext(), "ca",
-//                Toast.LENGTH_SHORT)
-//                .show();
-//    }
-
-//    @Override
-//    protected Dialog onCreateDialog(int id) {
-//        // TODO Auto-generated method stub
-//        if (id == 999) {
-//            return new DatePickerDialog(this,
-//                    myDateListener, year, month, day);
-//        }
-//        return null;
-//    }
-
-//    private DatePickerDialog.OnDateSetListener myDateListener = new
-//            DatePickerDialog.OnDateSetListener() {
-//                @Override
-//                public void onDateSet(DatePicker arg0,
-//                                      int arg1, int arg2, int arg3) {
-//                    showDate(arg1, arg2+1, arg3);
-//                }
-//            };
-//
-//    private void showDate(int year, int month, int day) {
-////        dateView.setText(new StringBuilder().append(year).append("-")
-////                .append(month).append("-").append(day));
-//    }
 
     private void postData(){
         final String nama = etNama.getText().toString().trim();
