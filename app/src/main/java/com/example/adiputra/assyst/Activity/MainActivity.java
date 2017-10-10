@@ -17,10 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.adiputra.assyst.Adapter.SlideAdapter;
-import com.example.adiputra.assyst.ListModulActivity;
-import com.example.adiputra.assyst.ListVoucherActivity;
 import com.example.adiputra.assyst.R;
-import com.example.adiputra.assyst.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
@@ -47,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0;i<dotscount;i++){
             dots[i] =new ImageView(this);
             dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_nonactivedot));
-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(8,0,8,0);
-
             sliderDotspanel.addView(dots[i],params);
         }
 
@@ -83,16 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 View menuContent = View.inflate(MainActivity.this, R.layout.popup_menu, null);
                 final Dialog popupMain = new Dialog(MainActivity.this);
                 popupMain.getWindow().getAttributes().windowAnimations = R.style.PopAnimation;
-
                 popupMain.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 popupMain.setContentView(menuContent);
-
                 popupMain.setCanceledOnTouchOutside(true);
-
                 WindowManager.LayoutParams wmlp = popupMain.getWindow().getAttributes();
-
                 wmlp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-
                 popupMain.show();
 
                 FloatingActionButton fbSettings = (FloatingActionButton) menuContent.findViewById(R.id.fb_popupmenu_settings);
@@ -107,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(MainActivity.this, ListActivity.class));
+                        finish();
                     }
                 });
                 FloatingActionButton fbVoucher = (FloatingActionButton) menuContent.findViewById(R.id.fb_popupmenu_voucher);
@@ -125,6 +116,5 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 }

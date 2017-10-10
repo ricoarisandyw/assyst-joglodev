@@ -1,7 +1,9 @@
-package com.example.adiputra.assyst;
+package com.example.adiputra.assyst.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.adiputra.assyst.R;
 
 public class DetailModulActivity extends AppCompatActivity {
 

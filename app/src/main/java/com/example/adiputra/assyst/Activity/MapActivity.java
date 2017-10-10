@@ -94,7 +94,6 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
                 finish();
             }
         });
-//        btnSaveLoc.setVisibility(GONE);
 
         //GET ALL LOCATION
         final ArrayList<LatLng> coordinates = new ArrayList<LatLng>();
@@ -104,35 +103,35 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
         gson = gsonBuilder.create();
         String GETLOC = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/show_location";
         StringRequest req = new StringRequest(Request.Method.GET, GETLOC,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            //Log.i("Response : ", response);
-                            //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
-                            List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
-                            int i=0;
-                            for (Configure post : posts) {
-                                n = n+1;
-                                loc[i] = post.getLokasi();
-                                lat[i] = post.getLatitude();
-                                lng[i] = post.getLongitude();
-                                rad[i] = post.getRadius();
-                                i++;
-                            }
-
-                        }catch(Exception e){
-                            e.printStackTrace();
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try{
+                        //Log.i("Response : ", response);
+                        //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                        List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
+                        int i=0;
+                        for (Configure post : posts) {
+                            n = n+1;
+                            loc[i] = post.getLokasi();
+                            lat[i] = post.getLatitude();
+                            lng[i] = post.getLongitude();
+                            rad[i] = post.getRadius();
+                            i++;
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Get Data : ", error.toString());
-                        Toast.makeText(context, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
+
+                    }catch(Exception e){
+                        e.printStackTrace();
                     }
                 }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Get Data : ", error.toString());
+                    Toast.makeText(context, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
+                }
+            }
         );
         requestQueue.add(req);
 

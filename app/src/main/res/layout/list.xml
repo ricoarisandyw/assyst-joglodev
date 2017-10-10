@@ -39,6 +39,7 @@
                 android:id="@+id/lokasi"
                 android:textColor="#000"
                 android:text="LOKASI"
+                android:maxLines="1"
                 android:textStyle="bold"
                 android:textSize="@dimen/_14sdp"
                 android:layout_width="match_parent"
@@ -48,6 +49,7 @@
                 android:id="@+id/alamat"
                 android:text="Jln. Anyer-Panarukan No. 5 Gang 3B sebelah barat gang 3A belok kiri dulu"
                 android:textColor="#000"
+                android:maxLines="2"
                 android:layout_below="@+id/lokasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adiputra.assyst.Helper.SharedPref;
 import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.R;
 
@@ -69,7 +70,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         requestQueue = Volley.newRequestQueue(context);
-
+        final SharedPref sharedPref = new SharedPref(context);
         //tambah (Configure)
         final Configure l = listData.get(position);
         //test
@@ -112,50 +113,91 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 dialogBtnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        final AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+                        alert.setTitle("DELETE");
+                        alert.setMessage("Are you sure delete ?");
+                        //alert.setPositiveButton("Yes", dialogClickListener);
+                        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
-                                        try {
-                                            String DELETE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/delete_location";
-                                            StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_LOCATION,
-                                                new Response.Listener<String>() {
-                                                    @Override
-                                                    public void onResponse(String response) {
-                                                        Toast.makeText(context, "Data Deleted", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                },
-                                                new Response.ErrorListener() {
-                                                    @Override
-                                                    public void onErrorResponse(VolleyError error) {
-                                                        Toast.makeText(context,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
-                                                    }
-                                                }){
-                                                @Override
-                                                protected Map<String,String> getParams(){
-                                                    Map<String,String> params = new HashMap<String, String>();
-                                                    params.put("id", String.valueOf(l.getId()));
-                                                    return params;
-                                                }
-                                            };
-                                            requestQueue.add(stringRequest);
-                                        }catch (Exception e){
-                                            e.printStackTrace();
+                                try {
+                                    String id = sharedPref.loadData("id");
+                                    String token = sharedPref.loadData("token");
+                                    String DELETE_LOCATION = "http://api.atrama-studio.com/backend/web/api-configure/"+l.getId()+"?access-token="+token;
+                                    StringRequest stringRequest = new StringRequest(Request.Method.DELETE, DELETE_LOCATION,
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                Toast.makeText(context, "Data Deleted", Toast.LENGTH_SHORT).show();
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Toast.makeText(context,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
+                                            }
                                         }
-
-                                        break;
-                                    case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
-                                        //Toast.makeText(context, "No Clicked", Toast.LENGTH_LONG).show(); break;
+                                    );
+//                                    {
+//                                        @Override
+//                                        protected Map<String,String> getParams(){
+//                                            Map<String,String> params = new HashMap<String, String>();
+//                                            params.put("id", String.valueOf(l.getId()));
+//                                            return params;
+//                                        }
+//                                    };
+                                    requestQueue.add(stringRequest);
+                                }catch (Exception e){
+                                    e.printStackTrace();
                                 }
                             }
-                        };
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                        builder.setTitle("DELETE DATA");
-                        builder.setMessage("Are you sure delete ?");
-                        builder.setPositiveButton("Yes", dialogClickListener);
-                        builder.setNegativeButton("No", dialogClickListener);
-                        builder.show();
+                        });
+                        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alert.show();
+                        //builder.setNegativeButton("No", dialogClickListener);
+                        //builder.show();
+//                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
+//                                        try {
+//                                            String DELETE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/delete_location";
+//                                            StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_LOCATION,
+//                                                new Response.Listener<String>() {
+//                                                    @Override
+//                                                    public void onResponse(String response) {
+//                                                        Toast.makeText(context, "Data Deleted", Toast.LENGTH_SHORT).show();
+//                                                    }
+//                                                },
+//                                                new Response.ErrorListener() {
+//                                                    @Override
+//                                                    public void onErrorResponse(VolleyError error) {
+//                                                        Toast.makeText(context,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
+//                                                    }
+//                                                }){
+//                                                @Override
+//                                                protected Map<String,String> getParams(){
+//                                                    Map<String,String> params = new HashMap<String, String>();
+//                                                    params.put("id", String.valueOf(l.getId()));
+//                                                    return params;
+//                                                }
+//                                            };
+//                                            requestQueue.add(stringRequest);
+//                                        }catch (Exception e){
+//                                            e.printStackTrace();
+//                                        }
+//
+//                                        break;
+//                                    case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
+//                                        //Toast.makeText(context, "No Clicked", Toast.LENGTH_LONG).show(); break;
+//                                }
+//                            }
+//                        };
                     }
                 });
 

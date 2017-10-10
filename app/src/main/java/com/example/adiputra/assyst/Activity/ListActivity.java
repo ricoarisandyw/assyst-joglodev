@@ -66,33 +66,50 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("List Configure");
         setSupportActionBar(toolbar);
-        final Animation animPopin = AnimationUtils.loadAnimation(this, R.anim.pop_in);
-        Animation animPopout = AnimationUtils.loadAnimation(this, R.anim.pop_out);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //onBackPressed();
+                Intent i = new Intent(ListActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(ListActivity.this, MapActivity.class);
-//                startActivity(i);
-                View menuContent = View.inflate(ListActivity.this, R.layout.popup_menu, null);
-                final Dialog popup = new Dialog(ListActivity.this);
-                popup.getWindow().getAttributes().windowAnimations = R.style.PopAnimation;
-
-                popup.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                popup.setContentView(menuContent);
-//                FloatingActionButton fb = (FloatingActionButton) menuContent.findViewById(R.id.fb_popupmenu_location);
-//                popup.setTitle("Select Filter");
-
-                popup.setCanceledOnTouchOutside(true);
-
-                WindowManager.LayoutParams wmlp = popup.getWindow().getAttributes();
-
-                wmlp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-
-                popup.show();
+                Intent i = new Intent(ListActivity.this, MapActivity.class);
+                startActivity(i);
             }
         });
+
+//        final Animation animPopin = AnimationUtils.loadAnimation(this, R.anim.pop_in);
+//        Animation animPopout = AnimationUtils.loadAnimation(this, R.anim.pop_out);
+//        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                View menuContent = View.inflate(ListActivity.this, R.layout.popup_menu, null);
+//                final Dialog popup = new Dialog(ListActivity.this);
+//                popup.getWindow().getAttributes().windowAnimations = R.style.PopAnimation;
+//
+//                popup.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                popup.setContentView(menuContent);
+////                FloatingActionButton fb = (FloatingActionButton) menuContent.findViewById(R.id.fb_popupmenu_location);
+////                popup.setTitle("Select Filter");
+//
+//                popup.setCanceledOnTouchOutside(true);
+//
+//                WindowManager.LayoutParams wmlp = popup.getWindow().getAttributes();
+//
+//                wmlp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+//
+//                popup.show();
+//            }
+//        });
 
         mAdapter = new ListAdapter(listData, context);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -149,7 +166,7 @@ public class ListActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e("Get Data : ", error.toString());
-                    Toast.makeText(ListActivity.this, "Cek Internet Connection!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListActivity.this, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
                 }
             }
         );
@@ -168,6 +185,9 @@ public class ListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
                 break;
             case R.id.action_profil:
                 Toast.makeText(this, "Profil selected", Toast.LENGTH_SHORT).show();
