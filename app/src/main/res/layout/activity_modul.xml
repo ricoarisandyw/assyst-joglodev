@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mrabid.pro_maker.DetailCorpActivity">
+
+    <include
+        android:id="@+id/header_modul"
+        layout="@layout/header" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-25dp"
+        android:layout_below="@id/header_modul">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:id="@+id/iv_modul_cover"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp"
+            android:elevation="2dp"
+            android:src="@drawable/img_invo" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#DDDDDD"
+            android:paddingTop="50dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="50dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="end"
+            android:layout_marginTop="10dp"
+            android:text="Nama Modul :\nInvo the Magician\nCreated by :\nJohn Doe\nSince:"
+            android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="2"
+            android:layout_below="@id/iv_modul_cover"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:weightSum="2"
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="321"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_file_download"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="321"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_thumb_up"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="321"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_thumb_down"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Sinopsis"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_margin="20dp"
+                        android:text="Invoker adalah kisah seorang magician dari Dota2 yang berkenala mencari mantra yang cukup kuat untuk menjadi magician terbaik di alam semesta. Semua elemen dia kuasai hanya saja dia sangat kesulitan untuk menggunakan elemen mana yang akan digunakan untuk pertarungan selanjutnya. Invoker adalah kisah seorang magician dari Dota2 yang berkenala mencari mantra yang cukup kuat untuk menjadi magician terbaik di alam semesta. Semua elemen dia kuasai hanya saja dia sangat kesulitan untuk menggunakan elemen mana yang akan digunakan untuk pertarungan selanjutnya. Invoker adalah kisah seorang magician dari Dota2 yang berkenala mencari mantra yang cukup kuat untuk menjadi magician terbaik di alam semesta. Semua elemen dia kuasai hanya saja dia sangat kesulitan untuk menggunakan elemen mana yang akan digunakan untuk pertarungan selanjutnya. Invoker adalah kisah seorang magician dari Dota2 yang berkenala mencari mantra yang cukup kuat untuk menjadi magician terbaik di alam semesta. Semua elemen dia kuasai hanya saja dia sangat kesulitan untuk menggunakan elemen mana yang akan digunakan untuk pertarungan selanjutnya. Invoker adalah kisah seorang magician dari Dota2 yang berkenala mencari mantra yang cukup kuat untuk menjadi magician terbaik di alam semesta. Semua elemen dia kuasai hanya saja dia sangat kesulitan untuk menggunakan elemen mana yang akan digunakan untuk pertarungan selanjutnya"
+                        android:layout_height="match_parent" />
+
+                </ScrollView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

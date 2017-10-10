@@ -10,17 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adiputra.assyst.Activity.MenuActivity;
-import com.example.adiputra.assyst.Activity.whonumberActivity;
+import com.example.adiputra.assyst.Activity.MainActivity;
 import com.example.adiputra.assyst.Model.Song;
 import com.example.adiputra.assyst.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -75,7 +72,7 @@ public class SongAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Toast.makeText(parent.getContext(), songs.get(position).getTitle()+" telah dipilih", Toast.LENGTH_SHORT).show();
                 saveData("currSong",currSong.getTitle(),parent.getContext());
-                Intent i = new Intent(parent.getContext(), MenuActivity.class);
+                Intent i = new Intent(parent.getContext(), MainActivity.class);
                 parent.getContext().startActivity(i);
                 ((Activity)parent.getContext()).finish();
             }

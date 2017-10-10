@@ -1,7 +1,9 @@
 package com.example.adiputra.assyst.Activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +12,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -60,13 +66,31 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("List Configure");
         setSupportActionBar(toolbar);
+        final Animation animPopin = AnimationUtils.loadAnimation(this, R.anim.pop_in);
+        Animation animPopout = AnimationUtils.loadAnimation(this, R.anim.pop_out);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ListActivity.this, MapActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(ListActivity.this, MapActivity.class);
+//                startActivity(i);
+                View menuContent = View.inflate(ListActivity.this, R.layout.popup_menu, null);
+                final Dialog popup = new Dialog(ListActivity.this);
+                popup.getWindow().getAttributes().windowAnimations = R.style.PopAnimation;
+
+                popup.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                popup.setContentView(menuContent);
+//                FloatingActionButton fb = (FloatingActionButton) menuContent.findViewById(R.id.fb_popupmenu_location);
+//                popup.setTitle("Select Filter");
+
+                popup.setCanceledOnTouchOutside(true);
+
+                WindowManager.LayoutParams wmlp = popup.getWindow().getAttributes();
+
+                wmlp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+
+                popup.show();
             }
         });
 

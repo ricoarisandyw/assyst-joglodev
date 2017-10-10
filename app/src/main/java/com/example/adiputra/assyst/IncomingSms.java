@@ -5,14 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.adiputra.assyst.Activity.IntroActivity;
 import com.example.adiputra.assyst.Activity.SpeechToTextActivity;
-import com.example.adiputra.assyst.Activity.TextToSpeechActivity;
 
 /**
  * Created by rickReaper on 6/15/2017.

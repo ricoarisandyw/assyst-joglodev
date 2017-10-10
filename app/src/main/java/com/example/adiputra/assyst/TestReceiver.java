@@ -8,7 +8,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.adiputra.assyst.Activity.IntroActivity;
+import com.example.adiputra.assyst.Activity.MainActivity;
 
 /**
  * Created by rickReaper on 6/15/2017.
@@ -43,7 +43,7 @@ public class TestReceiver extends BroadcastReceiver {
 
                     }
 
-                    context.startActivity(new Intent(context, IntroActivity.class).putExtra("number", mobileNumber)
+                    context.startActivity(new Intent(context, MainActivity.class).putExtra("number", mobileNumber)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             };

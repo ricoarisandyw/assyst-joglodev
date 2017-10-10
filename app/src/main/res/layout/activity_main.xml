@@ -1,19 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:animation="@transition/activity_slide"
     tools:context="com.example.adiputra.assyst.Activity.MainActivity">
 
-    <ImageView
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:src="@drawable/logo"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="200 P"
+            android:id="@+id/tv_main_point"
+            android:textSize="30dp"
+            android:layout_margin="10dp"
+            android:textStyle="bold" />
+
+        <include
+            android:id="@+id/header_main"
+            layout="@layout/header" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_below="@id/header_main"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                </android.support.v4.view.ViewPager>
+
+                <LinearLayout
+                    android:id="@+id/sliderDots_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_below="@+id/vp_image_slider"
+                    android:layout_marginTop="-30dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/sliderDots_main"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Assistant Name :
+                \nDavid
+                \nRingtone:
+                \nNokia.mp3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Active Modul"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Invoker the Chemist Magician" />
+
+                        <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_invo" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/_12sdp"
+        android:src="@drawable/ic_menu_black_24dp" />
+
+
+</android.support.design.widget.CoordinatorLayout>

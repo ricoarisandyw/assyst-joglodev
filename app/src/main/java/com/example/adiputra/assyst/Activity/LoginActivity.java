@@ -58,20 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (etName.getText().toString().equals("") || etName.getText().toString().trim()=="" || etName.getText().toString().isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else if (etPass.getText().toString().equals("") || etPass.getText().toString().trim()=="" || etPass.getText().toString().isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                } else {
-                    progress = new ProgressDialog(LoginActivity.this);
-                    progress.setMessage("Harap tunggu...");
-                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progress.setIndeterminate(true);
-                    progress.setProgress(0);
-                    progress.setCanceledOnTouchOutside(false);
-                    progress.show();
-                    cekLog(etName.getText().toString().trim(), etPass.getText().toString().trim());
-                }
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 

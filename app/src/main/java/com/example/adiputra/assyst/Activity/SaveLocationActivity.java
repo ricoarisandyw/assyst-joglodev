@@ -138,7 +138,7 @@ public class SaveLocationActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     Toast.makeText(SaveLocationActivity.this, "Configuration Saved",Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(SaveLocationActivity.this, MenuActivity.class);
+                                    Intent i = new Intent(SaveLocationActivity.this, MainActivity.class);
                                     startActivity(i);
                                     finish();
                                 }

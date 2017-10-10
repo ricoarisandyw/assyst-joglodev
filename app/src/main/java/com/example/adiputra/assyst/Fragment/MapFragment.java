@@ -240,46 +240,6 @@ public class MapFragment extends Fragment  {
         btnSaveLoc.setVisibility(View.GONE);
 
         //Search Locate Manually
-        PlaceAutocompleteFragment places = (PlaceAutocompleteFragment)
-                getActivity().getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-        places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                btnSaveLoc.setVisibility(View.VISIBLE);
-                locationName = place.getName();
-                alamat = place.getAddress();
-                latitude = place.getLatLng().latitude;
-                longitude = place.getLatLng().longitude;
-
-                LatLng mySearch = place.getLatLng();
-                googleMap.addMarker(new MarkerOptions().position(mySearch).title(place.getName().toString()).snippet(place.getAddress().toString()));
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(mySearch).zoom(20).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-                //Define Button btnSaveLocation
-                btnSaveLoc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent saveLocation = new Intent(getActivity(), SaveLocationActivity.class);
-                        saveLocation.putExtra("locationName", locationName);
-                        saveLocation.putExtra("alamat", alamat);
-                        saveLocation.putExtra("latitude", latitude.toString());
-                        saveLocation.putExtra("longitude", longitude.toString());
-                        startActivity(saveLocation);
-                    }
-                });
-            }
-            @Override
-            public void onError(Status status) {
-                Toast.makeText(getActivity(),status.toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Filter Search
-        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
-                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_NONE)
-                .build();
-        places.setFilter(typeFilter);
 
         return rootView;
     }
