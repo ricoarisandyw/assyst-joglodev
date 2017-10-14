@@ -61,19 +61,19 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (etEmail.getText().toString().equals("")) {
-                    Toast.makeText(SignUpActivity.this, "Email cannot blank!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this, "Email cannot blank!", Toast.LENGTH_SHORT).show();
                     Snackbar.make(linearLayout,"Email cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else if (etName.getText().toString().equals("")) {
-                    Toast.makeText(SignUpActivity.this, "Username cannot blank!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this, "Username cannot blank!", Toast.LENGTH_SHORT).show();
                     Snackbar.make(linearLayout,"Username cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else if (etPass.getText().toString().equals("")) {
-                    Toast.makeText(SignUpActivity.this, "Password cannot blank!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this, "Password cannot blank!", Toast.LENGTH_SHORT).show();
                     Snackbar.make(linearLayout,"Password cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else if (etConfirmPass.getText().toString().equals("")) {
-                    Toast.makeText(SignUpActivity.this, "Confirm Password cannot blank!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this, "Confirm Password cannot blank!", Toast.LENGTH_SHORT).show();
                     Snackbar.make(linearLayout,"Confirm Password cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else if (!etPass.getText().toString().equals(etConfirmPass.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this, "Password & Confirm Password not match!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this, "Password & Confirm Password not match!", Toast.LENGTH_SHORT).show();
                     Snackbar.make(linearLayout,"Password & Confirm Password not match",Snackbar.LENGTH_SHORT).show();
                 } else {
                     Log.i(null,"response : masuk else");

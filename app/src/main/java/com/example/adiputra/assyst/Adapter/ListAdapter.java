@@ -25,7 +25,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Helper.SharedPref;
 import com.example.adiputra.assyst.Model.Configure;
+import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private java.util.List<Configure> listData;
     private RequestQueue requestQueue;
     private Context context;
+    private Gson gson;
     String strAudio, strWifi, strAirPlane, strBluetooth, strMobileData, strMessage2;
     Activity mActivity = null;
 
@@ -138,14 +142,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                                             }
                                         }
                                     );
-//                                    {
-//                                        @Override
-//                                        protected Map<String,String> getParams(){
-//                                            Map<String,String> params = new HashMap<String, String>();
-//                                            params.put("id", String.valueOf(l.getId()));
-//                                            return params;
-//                                        }
-//                                    };
                                     requestQueue.add(stringRequest);
                                 }catch (Exception e){
                                     e.printStackTrace();
@@ -159,45 +155,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                             }
                         });
                         alert.show();
-                        //builder.setNegativeButton("No", dialogClickListener);
-                        //builder.show();
-//                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                switch (which) {
-//                                    case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
-//                                        try {
-//                                            String DELETE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/delete_location";
-//                                            StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_LOCATION,
-//                                                new Response.Listener<String>() {
-//                                                    @Override
-//                                                    public void onResponse(String response) {
-//                                                        Toast.makeText(context, "Data Deleted", Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                },
-//                                                new Response.ErrorListener() {
-//                                                    @Override
-//                                                    public void onErrorResponse(VolleyError error) {
-//                                                        Toast.makeText(context,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
-//                                                    }
-//                                                }){
-//                                                @Override
-//                                                protected Map<String,String> getParams(){
-//                                                    Map<String,String> params = new HashMap<String, String>();
-//                                                    params.put("id", String.valueOf(l.getId()));
-//                                                    return params;
-//                                                }
-//                                            };
-//                                            requestQueue.add(stringRequest);
-//                                        }catch (Exception e){
-//                                            e.printStackTrace();
-//                                        }
-//
-//                                        break;
-//                                    case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
-//                                        //Toast.makeText(context, "No Clicked", Toast.LENGTH_LONG).show(); break;
-//                                }
-//                            }
-//                        };
                     }
                 });
 
@@ -274,15 +231,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                         Button btnEditUpdate = (Button) dialogEdit.findViewById(R.id.btnEditUpdate);
                         btnEditUpdate.setOnClickListener(new View.OnClickListener(){
                             public void onClick(View v) {
-                                //json
                                 try {
-                                    String SAVE_LOCATION = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/update_location";
-                                    StringRequest stringRequest = new StringRequest(Request.Method.POST, SAVE_LOCATION,
+                                    final String id = sharedPref.loadData("id");
+                                    String token = sharedPref.loadData("token");
+                                    GsonBuilder gsonBuilder = new GsonBuilder();
+                                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                                    gson = gsonBuilder.create();
+                                    String UPDATE = "http://api.atrama-studio.com/backend/web/api-configure/update?access-token="+token;
+                                    StringRequest stringRequest = new StringRequest(Request.Method.PUT, UPDATE,
                                             new Response.Listener<String>() {
                                                 @Override
                                                 public void onResponse(String response) {
-                                                    Toast.makeText(context, "Configuration Updated",Toast.LENGTH_LONG).show();
-                                                    dialogEdit.dismiss();
+                                                    Result result = gson.fromJson(response, Result.class);
+                                                    if(result.isResult()==true){
+                                                        Toast.makeText(context, result.getMessage(),Toast.LENGTH_LONG).show();
+                                                        dialogEdit.dismiss();
+                                                    }else {
+                                                        Toast.makeText(context, result.getMessage(),Toast.LENGTH_LONG).show();
+                                                        dialogEdit.dismiss();
+                                                    }
                                                 }
                                             },
                                             new Response.ErrorListener() {

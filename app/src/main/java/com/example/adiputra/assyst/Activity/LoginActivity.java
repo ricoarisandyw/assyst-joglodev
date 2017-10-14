@@ -3,12 +3,14 @@ package com.example.adiputra.assyst.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,13 +51,14 @@ public class LoginActivity extends AppCompatActivity {
     EditText etPass;
     private RequestQueue requestQueue;
     private Gson gson;
-    //Assyst assyst = new Assyst();
+    private LinearLayout linearLayout;
     List<User> userList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        linearLayout = (LinearLayout) findViewById(R.id.linear_layout);
 
         requestQueue = Volley.newRequestQueue(LoginActivity.this);
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -67,12 +70,22 @@ public class LoginActivity extends AppCompatActivity {
         etPass = (EditText) findViewById(R.id.idPassword);
         etName = (EditText) findViewById(R.id.idUsername);
 
+        String id = sharedPref.loadData("id");
+        String token = sharedPref.loadData("token");
+        if(!id.isEmpty() && !token.isEmpty()){
+            //langsung masuk menu jika pernah login
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (etName.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "Username cannot blank!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "Username cannot blank!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(linearLayout,"Username cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else if (etPass.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "Password cannot blank!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "Password cannot blank!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(linearLayout,"Password cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else {
                     progress = new ProgressDialog(LoginActivity.this);
                     progress.setMessage("Please wait...");
@@ -103,15 +116,16 @@ public class LoginActivity extends AppCompatActivity {
                         Result result = gson.fromJson(response, Result.class);
                         if(result.isResult()==true){
                             Toast.makeText(LoginActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoginActivity.this, ""+result.getUserData().getId()+"\n"+result.getUserData().getToken(), Toast.LENGTH_SHORT).show();
                             sharedPref.saveData("id", String.valueOf(result.getUserData().getId()));
                             sharedPref.saveData("token", result.getUserData().getToken());
 //                            startActivity(new Intent(LoginActivity.this, ListActivity.class));
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
                             progress.hide();
                         }else{
-                            Toast.makeText(LoginActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                             progress.hide();
+                            Snackbar.make(linearLayout,result.getMessage(),Snackbar.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
