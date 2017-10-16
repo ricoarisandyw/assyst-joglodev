@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,9 +17,26 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Adapter.SlideAdapter;
+import com.example.adiputra.assyst.Helper.SharedPref;
+import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
@@ -29,11 +47,54 @@ public class MainActivity extends AppCompatActivity {
     private int dotscount;
     private ImageView[] dots;
     FloatingActionButton fabMain;
+    private RequestQueue requestQueue;
+    private Gson gson;
+    SharedPref sharedPref = new SharedPref(this);
+    private TextView tvMainPoint, tvUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String username = sharedPref.loadData("username");
+        tvUsername = (TextView) findViewById(R.id.tv_username);
+        tvUsername.setText("Hi, "+username+"!");
+
+        tvMainPoint = (TextView) findViewById(R.id.tv_main_point);
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        gson = gsonBuilder.create();
+        String id = sharedPref.loadData("id");
+        String token = sharedPref.loadData("token");
+        String GETPOINT_URL = "http://api.atrama-studio.com/backend/web/api-point?user_id="+id+"&access-token="+token;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, GETPOINT_URL,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        Result result = gson.fromJson(response, Result.class);
+                        Log.i(null,"response : "+response);
+                        if(result.isResult()==true){
+                            Toast.makeText(MainActivity.this, "Your Point : "+result.getPointData().getTotal(), Toast.LENGTH_SHORT).show();
+                            tvMainPoint.setText(String.valueOf(result.getPointData().getTotal()));
+                        }else{
+                            Toast.makeText(MainActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+        );
+        requestQueue.add(stringRequest);
 
         viewPager = (ViewPager)findViewById(R.id.vp_image_slider);
         sliderDotspanel = (LinearLayout)findViewById(R.id.sliderDots_main);

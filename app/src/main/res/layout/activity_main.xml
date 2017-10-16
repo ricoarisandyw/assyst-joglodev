@@ -11,14 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@mipmap/point"
+            android:layout_toLeftOf="@+id/tv_main_point"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="200 P"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:textColor="#dff706"
             android:id="@+id/tv_main_point"
             android:textSize="30dp"
-            android:layout_margin="10dp"
             android:textStyle="bold" />
 
         <include
@@ -47,62 +55,84 @@
                     android:layout_below="@+id/vp_image_slider"
                     android:layout_marginTop="-30dp"
                     android:gravity="center_vertical|center_horizontal"
-                    android:orientation="horizontal"></LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/sliderDots_main"
-                    android:layout_marginTop="40dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Assistant Name :
-                \nDavid
-                \nRingtone:
-                \nNokia.mp3" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Active Modul"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Invoker the Chemist Magician" />
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="200dp"
-                            android:layout_marginTop="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/img_invo" />
-                    </LinearLayout>
-
-
+                    android:orientation="horizontal">
                 </LinearLayout>
+
+
+                <TableLayout
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_below="@+id/sliderDots_main"
+                    android:id="@+id/tbl"
+                    android:stretchColumns="0,1"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow>
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/_2sdp"
+                            android:background="@color/bg_screen2"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Name"/>
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ringtone"/>
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ringtone"/>
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ringtone"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:background="@color/bg_screen2"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Active Module"/>
+
+                            <ImageView
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:src="@drawable/img_invo"
+                                android:scaleType="centerCrop"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </TableRow>
+                </TableLayout>
+
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
@@ -114,6 +144,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/_12sdp"
         android:src="@drawable/ic_menu_black_24dp" />
-
 
 </android.support.design.widget.CoordinatorLayout>

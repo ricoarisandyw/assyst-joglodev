@@ -18,6 +18,7 @@ public class Result {
     private String message;
     private User userData;
     private List<Configure> configureData;
+    private Point pointData;
 
     private Result(boolean result, String message){
         this.result = result;
@@ -54,5 +55,13 @@ public class Result {
 
     public void setConfigureData(List<Configure> configureData) {
         this.configureData = configureData;
+    }
+
+    public Point getPointData() {
+        return pointData;
+    }
+
+    public void setPointData(Point pointData) {
+        this.pointData = pointData;
     }
 }

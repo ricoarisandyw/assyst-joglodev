@@ -120,6 +120,9 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                             progress.hide();
+                            String user_id = String.valueOf(result.getUserData().getId());
+                            String token = result.getUserData().getToken();
+                            generatePoint(user_id, token);
                         }else{
                             Toast.makeText(SignUpActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                             progress.hide();
@@ -145,6 +148,48 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("username",name.toString());
                 params.put("password",password.toString());
                 Log.i(null, "response : "+email+name+password);
+                //params.put("phone",phone);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    public void generatePoint(final String user_id, String token){
+        String GENERATEPOINT_URL = "http://api.atrama-studio.com/backend/web/api-point?access-token="+token;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, GENERATEPOINT_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Result result = gson.fromJson(response, Result.class);
+                            Log.i(null,"response : "+response);
+                            if(result.isResult()==true){
+                                Toast.makeText(SignUpActivity.this, "Your Point : "+result.getPointData().getTotal(), Toast.LENGTH_SHORT).show();
+                                progress.hide();
+                            }else{
+                                Toast.makeText(SignUpActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                                progress.hide();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SignUpActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        //Snackbar.make(linearLayout, "Check Internet Connection",Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+        )
+        {
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("user_id", user_id);
+                params.put("total", String.valueOf(0));
                 //params.put("phone",phone);
                 return params;
             }

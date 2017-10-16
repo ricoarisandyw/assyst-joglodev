@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
                             sharedPref.saveData("id", String.valueOf(result.getUserData().getId()));
                             sharedPref.saveData("token", result.getUserData().getToken());
+                            sharedPref.saveData("username", result.getUserData().getUsername());
 //                            startActivity(new Intent(LoginActivity.this, ListActivity.class));
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
