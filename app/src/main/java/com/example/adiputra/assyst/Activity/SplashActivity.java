@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.adiputra.assyst.R;
+import com.example.adiputra.assyst.Service.MapIntentService;
 
 public class SplashActivity extends AppCompatActivity {
 

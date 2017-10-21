@@ -24,7 +24,7 @@ import com.example.adiputra.assyst.R;
 
 import java.util.ArrayList;
 
-public class whonumberActivity extends AppCompatActivity {
+public class WhoNumberActivity extends AppCompatActivity {
     Button searchBtn;
     EditText numberEt;
     TextView nameTv;

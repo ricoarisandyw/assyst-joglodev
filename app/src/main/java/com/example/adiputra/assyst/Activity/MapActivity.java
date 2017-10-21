@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adiputra.assyst.Helper.SharedPref;
 import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.R;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -55,16 +56,15 @@ import java.util.List;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class MapActivity extends AppCompatActivity implements PlaceSelectionListener{
-
+public class MapActivity extends AppCompatActivity implements PlaceSelectionListener {
+    SharedPref sharedPref = new SharedPref(this);
     MapView mMapView;
     private Context context;
     private GoogleMap map;
     private GoogleMap googleMap;
     public CharSequence locationName;
     public CharSequence alamat;
-    public Double latitude;
-    public Double longitude;
+    public Double latitude, longitude, set_latitude, set_longitude;
     private RequestQueue requestQueue;
     private Gson gson;
     private int n;
@@ -103,35 +103,32 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
         gson = gsonBuilder.create();
         String GETLOC = "http://adiputra17.it.student.pens.ac.id/joglo-developer/index.php/v1/show_location";
         StringRequest req = new StringRequest(Request.Method.GET, GETLOC,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try{
-                        //Log.i("Response : ", response);
-                        //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
-                        List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
-                        int i=0;
-                        for (Configure post : posts) {
-                            n = n+1;
-                            loc[i] = post.getLokasi();
-                            lat[i] = post.getLatitude();
-                            lng[i] = post.getLongitude();
-                            rad[i] = post.getRadius();
-                            i++;
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            List<Configure> posts = Arrays.asList(gson.fromJson(response, Configure[].class));
+                            int i = 0;
+                            for (Configure post : posts) {
+                                n = n + 1;
+                                loc[i] = post.getLokasi();
+                                lat[i] = post.getLatitude();
+                                lng[i] = post.getLongitude();
+                                rad[i] = post.getRadius();
+                                i++;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-
-                    }catch(Exception e){
-                        e.printStackTrace();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Get Data : ", error.toString());
+                        Toast.makeText(context, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
                     }
                 }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("Get Data : ", error.toString());
-                    Toast.makeText(context, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
-                }
-            }
         );
         requestQueue.add(req);
 
@@ -158,10 +155,10 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
                     // TODO: Consider calling
                     googleMap.setMyLocationEnabled(true);
                     return;
-                }else{
-                    if(!googleMap.isMyLocationEnabled())
+                } else {
+                    if (!googleMap.isMyLocationEnabled())
                         googleMap.setMyLocationEnabled(true);
-                    LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+                    LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     if (myLocation == null) {
                         Criteria criteria = new Criteria();
@@ -169,17 +166,19 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
                         String provider = lm.getBestProvider(criteria, true);
                         myLocation = lm.getLastKnownLocation(provider);
                     }
-                    if(myLocation!=null){
+                    if (myLocation != null) {
+                        sharedPref.saveData("set_latitude", String.valueOf(myLocation.getLatitude()));
+                        sharedPref.saveData("set_longitude", String.valueOf(myLocation.getLongitude()));
                         LatLng userLocation = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 8));
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10), 1500, null);
 
-                        for(int i = 0; i <  n; ++i){
+                        for (int i = 0; i < n; ++i) {
                             coordinates.add(new LatLng(lat[i], lng[i]));
                         }
 
-                        int i=0;
-                        for(LatLng cor : coordinates){
+                        int i = 0;
+                        for (LatLng cor : coordinates) {
                             googleMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(cor.latitude, cor.longitude))
                                     .title(loc[i])
@@ -223,7 +222,7 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
 
     @Override
     public void onPlaceSelected(Place place) {
-        Toast.makeText(MapActivity.this, "Lokasi : "+place.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MapActivity.this, "Lokasi : " + place.getName(), Toast.LENGTH_SHORT).show();
         Log.i(LOG_TAG, "Place Selected: " + place.getName());
         btnSaveLoc.setVisibility(VISIBLE);
         locationName = place.getName();
@@ -231,6 +230,7 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
         latitude = place.getLatLng().latitude;
         longitude = place.getLatLng().longitude;
 
+        //lat -long search
         LatLng mySearch = place.getLatLng();
         googleMap.addMarker(new MarkerOptions().position(mySearch).title(place.getName().toString()).snippet(place.getAddress().toString()));
         CameraPosition cameraPosition = new CameraPosition.Builder().target(mySearch).zoom(20).build();
@@ -241,6 +241,8 @@ public class MapActivity extends AppCompatActivity implements PlaceSelectionList
             @Override
             public void onClick(View v) {
                 Intent saveLocation = new Intent(getApplicationContext(), SaveLocationActivity.class);
+                saveLocation.putExtra("set_latitude", sharedPref.loadData("set_latitude"));
+                saveLocation.putExtra("set_longitude", sharedPref.loadData("set_longitude"));
                 saveLocation.putExtra("locationName", locationName);
                 saveLocation.putExtra("alamat", alamat);
                 saveLocation.putExtra("latitude", latitude.toString());

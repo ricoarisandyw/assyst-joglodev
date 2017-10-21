@@ -30,6 +30,7 @@ import com.example.adiputra.assyst.Adapter.SlideAdapter;
 import com.example.adiputra.assyst.Helper.SharedPref;
 import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.R;
+import com.example.adiputra.assyst.Service.MapIntentService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(null,"response : "+response);
                         if(result.isResult()==true){
                             Toast.makeText(MainActivity.this, "Your Point : "+result.getPointData().getTotal(), Toast.LENGTH_SHORT).show();
+                            sharedPref.saveData("point", String.valueOf(result.getPointData().getTotal()));
                             tvMainPoint.setText(String.valueOf(result.getPointData().getTotal()));
                         }else{
                             Toast.makeText(MainActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
@@ -132,6 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Intent service = new Intent(MainActivity.this, MapIntentService.class);
+        startService(service);
 
         fabMain = (FloatingActionButton) findViewById(R.id.fab_main);
         fabMain.setOnClickListener(new View.OnClickListener() {

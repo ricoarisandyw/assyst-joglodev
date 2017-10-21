@@ -53,18 +53,34 @@
                 android:layout_height="@dimen/_30sdp" />
 
             <TextView
-                android:id="@+id/tvLocationName"
+                android:id="@+id/tvSetLocation"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:text="Location"
+                android:text="Set Location"
                 android:textColor="#000"
                 android:layout_below="@+id/tvId"
                 android:textStyle="bold"/>
 
             <TextView
                 android:layout_toRightOf="@+id/tvLocationName"
-                android:id="@+id/tvLocationName2"
+                android:id="@+id/tvSetLocation2"
                 android:layout_below="@+id/tvId2"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+            <TextView
+                android:id="@+id/tvLocationName"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:text="Location"
+                android:textColor="#000"
+                android:layout_below="@+id/tvSetLocation"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/tvLocationName"
+                android:id="@+id/tvLocationName2"
+                android:layout_below="@+id/tvSetLocation2"
                 android:layout_width="@dimen/_220sdp"
                 android:layout_height="@dimen/_30sdp" />
 

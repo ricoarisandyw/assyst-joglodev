@@ -36,7 +36,7 @@ public class SaveLocationActivity extends AppCompatActivity {
     //int id;
     RelativeLayout relativeLayout;
     String strAudio, strWifi, strAirPlane, strBluetooth, strMobileData;
-    private TextView location, alamat, latitude, longitude;
+    private TextView location, alamat, latitude, longitude, myLoc;
     private EditText radius, message;
     Context ctx = this;
     private RequestQueue requestQueue;
@@ -65,6 +65,7 @@ public class SaveLocationActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(SaveLocationActivity.this);
 
         //final TextView ID = (TextView) findViewById(R.id.tvId2);
+        myLoc = (TextView) findViewById(R.id.tvSetLocation2);
         location = (TextView) findViewById(R.id.tvLocationName2);
         alamat = (TextView) findViewById(R.id.tvAlamat2);
         latitude = (TextView) findViewById(R.id.tvLatitude);
@@ -127,8 +128,9 @@ public class SaveLocationActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            myLoc.setText(extras.getString("set_latitude") + " : "+extras.getString("set_longitude"));
             location.setText(extras.getString("locationName"));
             alamat.setText(extras.getString("alamat"));
             latitude.setText(extras.getString("latitude"));
@@ -142,6 +144,8 @@ public class SaveLocationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (radius.getText().toString().equals("")){
                     Snackbar.make(relativeLayout,"Radius cannot blank!",Snackbar.LENGTH_SHORT).show();
+                } else if (message.getText().toString().equals("")){
+                    Snackbar.make(relativeLayout,"Message cannot blank!",Snackbar.LENGTH_SHORT).show();
                 } else {
                     try {
                         final String id = sharedPref.loadData("id");
@@ -178,6 +182,8 @@ public class SaveLocationActivity extends AppCompatActivity {
                             protected Map<String,String> getParams(){
                                 Map<String,String> params = new HashMap<String, String>();
                                 params.put("user_id", id);
+                                params.put("set_latitude", extras.getString("set_latitude"));
+                                params.put("set_longitude", extras.getString("set_longitude"));
                                 params.put("lokasi", location.getText().toString());
                                 params.put("alamat", alamat.getText().toString());
                                 params.put("latitude", latitude.getText().toString());
@@ -189,6 +195,7 @@ public class SaveLocationActivity extends AppCompatActivity {
                                 params.put("audio", strAudio);
                                 params.put("air_plane", strAirPlane);
                                 params.put("mobile_data", strMobileData);
+                                params.put("flag", String.valueOf(0));
                                 return params;
                             }
                         };

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class songlistActivity extends AppCompatActivity {
+public class SongListActivity extends AppCompatActivity {
 
     private ArrayList<Song> songList = new ArrayList<Song>();
     private ListView songView;

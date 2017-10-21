@@ -9,18 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.speech.tts.TextToSpeech;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.adiputra.assyst.Activity.SpeechToTextActivity;
-import com.example.adiputra.assyst.Activity.TextToSpeechActivity;
-import com.example.adiputra.assyst.Activity.whonumberActivity;
-
-import java.util.Locale;
-
-import static android.content.Context.TELEPHONY_SERVICE;
 
 public class IncomingCallInterceptor extends BroadcastReceiver{
     private TextToSpeech tts;

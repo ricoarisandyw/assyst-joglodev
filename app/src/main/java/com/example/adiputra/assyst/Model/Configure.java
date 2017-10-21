@@ -5,30 +5,21 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Configure {
-    //@SerializedName("id")
     private int id;
-    //@SerializedName("lokasi")
+    private float set_latitude;
+    private float set_longitude;
     private String lokasi;
-    //@SerializedName("alamat")
     private String alamat;
-    //@SerializedName("latitude")
     private float latitude;
-    //@SerializedName("longitude")
     private float longitude;
-    //@SerializedName("message")
     private String message;
-    //@SerializedName("radius")
     private int radius;
-    //@SerializedName("wifi")
     private String wifi;
-    //@SerializedName("bluetooth")
     private String bluetooth;
-    //@SerializedName("audio")
     private String audio;
-    //@SerializedName("air_plane")
     private String air_plane;
-    //@SerializedName("mobile_data")
     private String mobile_data;
+    private int flag;
 
     public Configure(int id, String lokasi, String alamat, float latitude, float longitude, int radius, String message,
                      String wifi, String bluetooth, String audio, String air_plane, String mobile_data) {
@@ -155,11 +146,38 @@ public class Configure {
         this.mobile_data = mobile_data;
     }
 
+    public float getSet_latitude() {
+        return set_latitude;
+    }
 
-    //    public String toString(){
-//        return getAlamat()+""+getLokasi();
-//    }
-//
+    public void setSet_latitude(float set_latitude) {
+        this.set_latitude = set_latitude;
+    }
+
+    public float getSet_longitude() {
+        return set_longitude;
+    }
+
+    public void setSet_longitude(float set_longitude) {
+        this.set_longitude = set_longitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
     public class ListLoc {
         public List<Configure> ll;
     }
