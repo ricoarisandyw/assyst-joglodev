@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Helper.SharedPref;
+import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.Model.Voucher;
 import com.example.adiputra.assyst.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by adiputra on 10/23/2017.
@@ -25,6 +37,8 @@ import java.util.List;
 public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.MyViewHolder> {
 
     Context context;
+    private RequestQueue requestQueue;
+    private Gson gson;
     private List<Voucher> voucherList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -58,6 +72,7 @@ public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.
 
     @Override
     public void onBindViewHolder(ListVoucherAdapter.MyViewHolder holder, int position) {
+        final SharedPref sharedPref = new SharedPref(context);
         final Voucher voucher = voucherList.get(position);
         holder.nama_voucher.setText(voucher.getNama_voucher().toUpperCase());
         holder.deskripsi_voucher.setText(voucher.getDeskripsi());
@@ -84,7 +99,11 @@ public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(v.getContext(), ""+String.valueOf(voucher.getId())+" "+String.valueOf(voucher.getProduk_id()), Toast.LENGTH_SHORT).show();
-                        actionBtnRedeem(voucher.getId(), voucher.getProduk_id());
+                        String point = sharedPref.loadData("point");
+                        int _point = Integer.parseInt(point);
+                        int _harga = Integer.parseInt(String.valueOf(voucher.getHarga()));
+                        final int total_point = (_point)-(_harga);
+                        actionBtnRedeem(voucher.getId(), voucher.getProduk_id(), total_point);
                     }
                 });
 
@@ -93,10 +112,47 @@ public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.
         });
     }
 
-    public void actionBtnRedeem(int id, int produk_id){
+    public void actionBtnRedeem(int id, int produk_id, final int total_point){
         SharedPref sharedPref = new SharedPref(context);
-        String point = sharedPref.loadData("token");
-        Toast.makeText(context, ""+point, Toast.LENGTH_SHORT).show();
+        final String user_id = sharedPref.loadData("id");
+        String token = sharedPref.loadData("token");
+        requestQueue = Volley.newRequestQueue(context);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        gson = gsonBuilder.create();
+        String PUTPOINT_URL = "http://api.atrama-studio.com/backend/web/api-point/update?user_id="+user_id+"&access-token="+token;
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, PUTPOINT_URL,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        Result result = gson.fromJson(response, Result.class);
+                        Log.i(null,"response : "+response);
+                        if(result.isResult()==true){
+                            Toast.makeText(context, "Your Point : "+total_point, Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(context, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+        ){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("total", String.valueOf(total_point));
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
     @Override
