@@ -13,16 +13,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="200 P"
-        android:id="@+id/tv_main_point"
-        android:textSize="30dp"
-        android:layout_margin="10dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/selectModul"
         android:text="Select Modul"
         android:layout_margin="10dp"
@@ -30,6 +20,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.SearchView
+        android:layout_width="match_parent"
+        android:id="@+id/sv_listmodul_modul"
+        android:layout_height="wrap_content"/>
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
@@ -95,97 +90,15 @@
 
     </HorizontalScrollView>
 
-    <ScrollView
+    <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:weightSum="2"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_margin="30dp"
-                        android:background="@drawable/book1"
-                        android:layout_height="180dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_margin="30dp"
-                        android:background="@drawable/book5"
-                        android:layout_height="180dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_margin="30dp"
-                        android:background="@drawable/book2"
-                        android:layout_height="180dp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_margin="30dp"
-                        android:background="@drawable/book2"
-                        android:layout_height="180dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_margin="30dp"
-                        android:background="@drawable/book4"
-                        android:layout_height="180dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_margin="30dp"
-                        android:background="@drawable/book1"
-                        android:layout_height="180dp" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_margin="30dp"
-                    android:background="@drawable/book4"
-                    android:layout_height="180dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_margin="30dp"
-                    android:background="@drawable/book1"
-                    android:layout_height="180dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:id="@+id/gv_listmodul_modul"
+        android:columnWidth="160dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center" />
 
 </LinearLayout>
