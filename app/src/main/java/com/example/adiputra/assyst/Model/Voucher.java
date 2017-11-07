@@ -8,14 +8,7 @@ public class Voucher {
     private int id, produk_id, harga;
     private String nama_voucher, kategori_voucher, deskripsi, masa_tenggang;
 
-    public Voucher(String nama_voucher, String deskripsi, int harga, String masa_tenggang) {
-        this.harga = harga;
-        this.nama_voucher = nama_voucher;
-        this.deskripsi = deskripsi;
-        this.masa_tenggang = masa_tenggang;
-    }
-
-    public Voucher(int id, int produk_id, int harga, String nama_voucher, String kategori_voucher, String deskripsi, String masa_tenggang) {
+    public Voucher(int id, int produk_id, String nama_voucher, String kategori_voucher, String deskripsi, int harga, String masa_tenggang) {
         this.id = id;
         this.produk_id = produk_id;
         this.harga = harga;

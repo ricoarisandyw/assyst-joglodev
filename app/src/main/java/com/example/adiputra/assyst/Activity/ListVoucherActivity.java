@@ -1,5 +1,6 @@
 package com.example.adiputra.assyst.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,20 +8,44 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Adapter.ListVoucherAdapter;
+import com.example.adiputra.assyst.Helper.SharedPref;
+import com.example.adiputra.assyst.Model.Configure;
+import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.Model.Voucher;
 import com.example.adiputra.assyst.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ListVoucherActivity extends AppCompatActivity {
 
+    private TextView tvPoint;
     private List<Voucher> voucherList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ListVoucherAdapter vAdapter;
+    Context context;
+    //parse json
+    private RequestQueue requestQueue;
+    private Gson gson;
+    SharedPref sharedPref = new SharedPref(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +66,12 @@ public class ListVoucherActivity extends AppCompatActivity {
             }
         });
 
+        tvPoint = (TextView) findViewById(R.id.tv_main_point);
+        tvPoint.setText(sharedPref.loadData("point"));
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        vAdapter = new ListVoucherAdapter(voucherList);
+        vAdapter = new ListVoucherAdapter(voucherList, context);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -53,41 +81,92 @@ public class ListVoucherActivity extends AppCompatActivity {
     }
 
     private void prepareVoucherData() {
-        Voucher voucher = new Voucher(
-                "GEMSCHOOL NEW LOSTSAGA",
-                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-                100,
-                "2015");
-        voucherList.add(voucher);
-
-        voucher = new Voucher(
-                "GEMSCHOOL NEW LOSTSAGA",
-                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-                100,
-                "2015");
-        voucherList.add(voucher);
-
-        voucher = new Voucher(
-                "GEMSCHOOL NEW LOSTSAGA",
-                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-                100,
-                "2015");
-        voucherList.add(voucher);
-
-        voucher = new Voucher(
-                "GEMSCHOOL NEW LOSTSAGA",
-                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-                100,
-                "2015");
-        voucherList.add(voucher);
-
-        voucher = new Voucher(
-                "GEMSCHOOL NEW LOSTSAGA",
-                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-                100,
-                "2015");
-        voucherList.add(voucher);
-
-        vAdapter.notifyDataSetChanged();
+        requestQueue = Volley.newRequestQueue(ListVoucherActivity.this);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        gson = gsonBuilder.create();
+        String id = sharedPref.loadData("id");
+        String token = sharedPref.loadData("token");
+        //Toast.makeText(ListVoucherActivity.this, "id : "+id+"\ntoken : "+token, Toast.LENGTH_SHORT).show();
+        String GETVOUCHER = "http://api.atrama-studio.com/backend/web/api-voucher?access-token="+token;
+        StringRequest req = new StringRequest(Request.Method.GET, GETVOUCHER,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try{
+                        Result result = gson.fromJson(response, Result.class);
+                        Log.i("Response : ", response);
+                        Log.i("Response : ", String.valueOf(result.isResult()));
+                        if(result.isResult()==true){
+                            Toast.makeText(ListVoucherActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                            JsonParser jsonParser = new JsonParser();
+                            JsonObject jo = (JsonObject)jsonParser.parse(response);
+                            JsonArray jsonArr = jo.getAsJsonArray("voucherData");
+                            List<Voucher> vouchers = Arrays.asList(gson.fromJson(jsonArr, Voucher[].class));
+                            for (Voucher post : vouchers) {
+                                voucherList.add(new Voucher(
+                                    post.getId(),
+                                    post.getProduk_id(),
+                                    post.getNama_voucher(),
+                                    post.getKategori_voucher(),
+                                    post.getDeskripsi(),
+                                    post.getHarga(),
+                                    post.getMasa_tenggang()
+                                ));
+                            }
+                            vAdapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(ListVoucherActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Get Data : ", error.toString());
+                    Toast.makeText(ListVoucherActivity.this, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        );
+        requestQueue.add(req);
+//        Voucher voucher = new Voucher(
+//                "GEMSCHOOL NEW LOSTSAGA",
+//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
+//                100,
+//                "2015");
+//        voucherList.add(voucher);
+//
+//        voucher = new Voucher(
+//                "GEMSCHOOL NEW LOSTSAGA",
+//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
+//                100,
+//                "2015");
+//        voucherList.add(voucher);
+//
+//        voucher = new Voucher(
+//                "GEMSCHOOL NEW LOSTSAGA",
+//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
+//                100,
+//                "2015");
+//        voucherList.add(voucher);
+//
+//        voucher = new Voucher(
+//                "GEMSCHOOL NEW LOSTSAGA",
+//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
+//                100,
+//                "2015");
+//        voucherList.add(voucher);
+//
+//        voucher = new Voucher(
+//                "GEMSCHOOL NEW LOSTSAGA",
+//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
+//                100,
+//                "2015");
+//        voucherList.add(voucher);
+//
+//        vAdapter.notifyDataSetChanged();
     }
 }

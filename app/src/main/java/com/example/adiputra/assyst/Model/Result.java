@@ -19,7 +19,7 @@ public class Result {
     private User userData;
     private List<Configure> configureData;
     private Point pointData;
-    private Voucher voucherData;
+    private List<Voucher> voucherData;
 
     private Result(boolean result, String message){
         this.result = result;
@@ -66,11 +66,11 @@ public class Result {
         this.pointData = pointData;
     }
 
-    public Voucher getVoucherData() {
+    public List<Voucher> getVoucherData() {
         return voucherData;
     }
 
-    public void setVoucherData(Voucher voucherData) {
+    public void setVoucherData(List<Voucher> voucherData) {
         this.voucherData = voucherData;
     }
 }

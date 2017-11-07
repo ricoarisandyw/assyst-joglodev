@@ -1,65 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:paddingLeft="@dimen/_5sdp"
     android:paddingRight="@dimen/_5sdp"
-    android:paddingTop="@dimen/_5sdp"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingBottom="@dimen/_5sdp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_voucher_item"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_voucher"
-            android:layout_centerVertical="true"
-            android:src="@drawable/voucher"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp" />
-
-        <TextView
-            android:id="@+id/tv_nama_voucher"
-            android:textStyle="bold"
-            android:layout_toRightOf="@+id/iv_voucher"
-            android:text="GEMSCHOOL NEW LOSTSAGA"
+        <RelativeLayout
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_desc_voucher"
-            android:layout_below="@+id/tv_nama_voucher"
-            android:layout_toRightOf="@+id/iv_voucher"
-            android:maxLines="2"
-            android:text="Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_voucher"
+                android:layout_centerVertical="true"
+                android:src="@drawable/voucher"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp" />
 
-        <TextView
-            android:id="@+id/tv_harga"
-            android:layout_below="@+id/tv_desc_voucher"
-            android:layout_toRightOf="@+id/iv_voucher"
-            android:maxLines="2"
-            android:textStyle="bold"
-            android:text="Harga : 100 P"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_nama_voucher"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_toRightOf="@+id/iv_voucher"
+                android:text="GEMSCHOOL NEW LOSTSAGA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv_masa_tenggang"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tv_desc_voucher"
-            android:maxLines="2"
-            android:textStyle="bold"
-            android:text="Expired : 10-10-1001"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_desc_voucher"
+                android:layout_below="@+id/tv_nama_voucher"
+                android:layout_toRightOf="@+id/iv_voucher"
+                android:maxLines="2"
+                android:text="Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_harga"
+                android:layout_below="@+id/tv_desc_voucher"
+                android:layout_toRightOf="@+id/iv_voucher"
+                android:maxLines="2"
+                android:background="@drawable/bg_rounded_point"
+                android:paddingTop="@dimen/_1sdp"
+                android:paddingBottom="@dimen/_1sdp"
+                android:paddingLeft="@dimen/_3sdp"
+                android:paddingRight="@dimen/_3sdp"
+                android:text="Harga : 100 P"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_masa_tenggang"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_desc_voucher"
+                android:maxLines="2"
+                android:textColor="#000"
+                android:text="Expired : 10-10-1001"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
     <View
         android:background="#ddd"
