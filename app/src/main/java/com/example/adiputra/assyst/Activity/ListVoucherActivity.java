@@ -21,10 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.adiputra.assyst.Adapter.ImageAdapter;
 import com.example.adiputra.assyst.Adapter.ListVoucherAdapter;
 import com.example.adiputra.assyst.Helper.SharedPref;
-import com.example.adiputra.assyst.Model.Book;
 import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.Model.Voucher;
@@ -105,14 +103,6 @@ public class ListVoucherActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        ImageView ivFilter = (ImageView) findViewById(R.id.iv_ListVoucher_filter);
-        ivFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void prepareVoucherData() {
@@ -148,15 +138,6 @@ public class ListVoucherActivity extends AppCompatActivity {
                                     post.getHarga(),
                                     post.getMasa_tenggang()
                                 ));
-                                tempVoucherList.add(new Voucher(
-                                        post.getId(),
-                                        post.getProduk_id(),
-                                        post.getNama_voucher(),
-                                        post.getKategori_voucher(),
-                                        post.getDeskripsi(),
-                                        post.getHarga(),
-                                        post.getMasa_tenggang()
-                                ));
                             }
                             vAdapter.notifyDataSetChanged();
                         }else{
@@ -190,4 +171,5 @@ public class ListVoucherActivity extends AppCompatActivity {
         }
         return vouchers1;
     }
+
 }
