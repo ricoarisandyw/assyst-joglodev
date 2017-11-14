@@ -76,7 +76,7 @@ public class ListVoucherActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        vAdapter = new ListVoucherAdapter(voucherList, context);
+        vAdapter = new ListVoucherAdapter(voucherList, ListVoucherActivity.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
