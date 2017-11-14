@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adiputra.assyst.Adapter.ImageAdapter;
 import com.example.adiputra.assyst.Adapter.ListVoucherAdapter;
 import com.example.adiputra.assyst.Helper.SharedPref;
+import com.example.adiputra.assyst.Model.Book;
 import com.example.adiputra.assyst.Model.Configure;
 import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.Model.Voucher;
@@ -39,6 +43,7 @@ public class ListVoucherActivity extends AppCompatActivity {
 
     private TextView tvPoint;
     private List<Voucher> voucherList = new ArrayList<>();
+    private List<Voucher> tempVoucherList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ListVoucherAdapter vAdapter;
     Context context;
@@ -78,6 +83,36 @@ public class ListVoucherActivity extends AppCompatActivity {
         recyclerView.setAdapter(vAdapter);
 
         prepareVoucherData();
+
+        SearchView searchView = (SearchView) findViewById(R.id.sv_listvoucher_voucher);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(ListVoucherActivity.this, "Find : "+query,Toast.LENGTH_SHORT).show();
+                tempVoucherList = filterBook(voucherList, query);
+                recyclerView.setAdapter(new ListVoucherAdapter(tempVoucherList,ListVoucherActivity.this));
+                for(Voucher b : tempVoucherList){
+                    Log.d("Voucher AF", b.getNama_voucher());
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals("")){
+                    this.onQueryTextSubmit("");
+                }
+                return true;
+            }
+        });
+
+        ImageView ivFilter = (ImageView) findViewById(R.id.iv_ListVoucher_filter);
+        ivFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void prepareVoucherData() {
@@ -113,6 +148,15 @@ public class ListVoucherActivity extends AppCompatActivity {
                                     post.getHarga(),
                                     post.getMasa_tenggang()
                                 ));
+                                tempVoucherList.add(new Voucher(
+                                        post.getId(),
+                                        post.getProduk_id(),
+                                        post.getNama_voucher(),
+                                        post.getKategori_voucher(),
+                                        post.getDeskripsi(),
+                                        post.getHarga(),
+                                        post.getMasa_tenggang()
+                                ));
                             }
                             vAdapter.notifyDataSetChanged();
                         }else{
@@ -132,41 +176,18 @@ public class ListVoucherActivity extends AppCompatActivity {
             }
         );
         requestQueue.add(req);
-//        Voucher voucher = new Voucher(
-//                "GEMSCHOOL NEW LOSTSAGA",
-//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-//                100,
-//                "2015");
-//        voucherList.add(voucher);
-//
-//        voucher = new Voucher(
-//                "GEMSCHOOL NEW LOSTSAGA",
-//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-//                100,
-//                "2015");
-//        voucherList.add(voucher);
-//
-//        voucher = new Voucher(
-//                "GEMSCHOOL NEW LOSTSAGA",
-//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-//                100,
-//                "2015");
-//        voucherList.add(voucher);
-//
-//        voucher = new Voucher(
-//                "GEMSCHOOL NEW LOSTSAGA",
-//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-//                100,
-//                "2015");
-//        voucherList.add(voucher);
-//
-//        voucher = new Voucher(
-//                "GEMSCHOOL NEW LOSTSAGA",
-//                "Dapatkan hero terlengkap dan paling hebat yang pernah ada di dunia",
-//                100,
-//                "2015");
-//        voucherList.add(voucher);
-//
-//        vAdapter.notifyDataSetChanged();
+    }
+
+    public List<Voucher> filterBook(List<Voucher> vouchers, String value){
+        List<Voucher> vouchers1 = new ArrayList<>();
+        for(Voucher b : vouchers){
+            if(b.getNama_voucher().toLowerCase().contains(value.toLowerCase())){
+                vouchers1.add(b);
+            }
+        }
+        if(value.equalsIgnoreCase("")){
+            vouchers1 = voucherList;
+        }
+        return vouchers1;
     }
 }

@@ -30,30 +30,102 @@
         android:layout_height="?attr/actionBarSize">
 
         <RelativeLayout
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
+            <android.support.v7.widget.SearchView
+                android:layout_width="wrap_content"
+                android:id="@+id/sv_listvoucher_voucher"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.SearchView>
 
             <ImageView
                 android:id="@+id/iv_point"
                 android:src="@mipmap/point"
+                android:layout_alignParentRight="true"
                 android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp" />
+                android:layout_marginRight="20dp"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/iv_point"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_toLeftOf="@id/iv_point"
                 android:textColor="#dff706"
-                android:text="10"
+                android:text="0"
                 android:id="@+id/tv_main_point"
+                android:layout_marginRight="10dp"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:textSize="10dp"
+                android:text="terlaris"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:textSize="10dp"
+                android:text="terpopuler"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:textSize="10dp"
+                android:text="terbaru"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:textSize="10dp"
+                android:text="termurah"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_button"
+                android:textColor="@color/White"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:textSize="10dp"
+                android:text="termahal"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <android.support.v7.widget.RecyclerView
         android:background="#FFF"

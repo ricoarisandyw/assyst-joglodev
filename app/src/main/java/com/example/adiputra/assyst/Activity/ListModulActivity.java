@@ -71,7 +71,10 @@ public class ListModulActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                if(newText.equals("")){
+                    this.onQueryTextSubmit("");
+                }
+                return true;
             }
         });
     }
@@ -82,6 +85,9 @@ public class ListModulActivity extends AppCompatActivity {
             if(b.title.toLowerCase().contains(value.toLowerCase())){
                 books1.add(b);
             }
+        }
+        if(value.equalsIgnoreCase("")){
+            books1 = books;
         }
         return books1;
     }
