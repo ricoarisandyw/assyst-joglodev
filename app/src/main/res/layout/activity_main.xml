@@ -14,12 +14,14 @@
         <ImageView
             android:layout_marginTop="@dimen/_10sdp"
             android:src="@mipmap/point"
+            android:elevation="@dimen/_5sdp"
             android:layout_toLeftOf="@+id/tv_main_point"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp" />
 
         <TextView
             android:layout_width="wrap_content"
+            android:elevation="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/_10sdp"
@@ -27,6 +29,7 @@
             android:textColor="#dff706"
             android:id="@+id/tv_main_point"
             android:textSize="30dp"
+            android:text="200"
             android:textStyle="bold" />
 
         <include
@@ -34,8 +37,8 @@
             layout="@layout/header" />
 
         <ScrollView
+            android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
-            android:layout_below="@id/header_main"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -43,6 +46,7 @@
                 android:layout_height="match_parent">
 
                 <android.support.v4.view.ViewPager
+
                     android:id="@+id/vp_image_slider"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
@@ -71,7 +75,6 @@
                     <TableRow>
                         <LinearLayout
                             android:layout_marginRight="@dimen/_2sdp"
-                            android:background="@color/bg_screen2"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -81,35 +84,28 @@
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Name"/>
+                                android:text="Name : Joglodev"/>
 
                             <TextView
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Ringtone"/>
+                                android:text="Ringtone : we can.mp3"/>
 
                             <TextView
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Ringtone"/>
+                                android:text="Location Active :\n3 Item"/>
 
-                            <TextView
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Ringtone"/>
 
                         </LinearLayout>
 
 
                         <LinearLayout
                             android:layout_marginLeft="@dimen/_2sdp"
-                            android:background="@color/bg_screen2"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -119,14 +115,13 @@
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Active Module"/>
+                                android:text="Active Book"/>
 
                             <ImageView
                                 android:layout_marginTop="@dimen/_3sdp"
-                                android:src="@drawable/img_invo"
-                                android:scaleType="centerCrop"
+                                android:src="@drawable/harry"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="200dp" />
 
                         </LinearLayout>
 
@@ -135,6 +130,13 @@
 
             </RelativeLayout>
         </ScrollView>
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:paddingBottom="80dp"
+            android:id="@+id/iv_main_activeBook"
+            android:src="@drawable/assyst_pembatas"
+            android:layout_height="220dp" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

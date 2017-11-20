@@ -2,7 +2,9 @@ package com.example.adiputra.assyst.Activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -36,6 +38,7 @@ import com.google.gson.GsonBuilder;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,10 +56,18 @@ public class MainActivity extends AppCompatActivity {
     SharedPref sharedPref = new SharedPref(this);
     private TextView tvMainPoint, tvUsername;
 
+    //TEST STREAM MP3
+    static final String AUDIO_PATH =
+            "http://yourHost/play.mp3";
+    private MediaPlayer mediaPlayer;
+    private int playbackPosition=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        startActivity(new Intent(this,SpeechToTextActivity.class));
 
         String username = sharedPref.loadData("username");
         tvUsername = (TextView) findViewById(R.id.tv_username);
@@ -104,6 +115,13 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
+        ImageView ivActiveBook = (ImageView) findViewById(R.id.iv_main_activeBook);
+        ivActiveBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DetailModulActivity.class));
+            }
+        });
 
         for(int i=0;i<dotscount;i++){
             dots[i] =new ImageView(this);
@@ -199,4 +217,48 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private void playAudio(String url) throws Exception
+    {
+        killMediaPlayer();
+
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(url);
+        mediaPlayer.prepare();
+        mediaPlayer.start();
+    }
+
+    private void killMediaPlayer() {
+        if(mediaPlayer!=null) {
+            try {
+                mediaPlayer.release();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /*private void playLocalAudio_UsingDescriptor() throws Exception {
+
+        AssetFileDescriptor fileDesc = getResources().openRawResourceFd(
+                R.raw.music_file);
+        if (fileDesc != null) {
+
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(fileDesc.getFileDescriptor(), fileDesc
+                    .getStartOffset(), fileDesc.getLength());
+
+            fileDesc.close();
+
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        }
+    }
+
+    private void playLocalAudio() throws Exception
+    {
+        mediaPlayer = MediaPlayer.create(this, R.raw.music_file);
+        mediaPlayer.start();
+    }*/
 }

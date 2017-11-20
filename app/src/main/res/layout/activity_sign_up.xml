@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:id="@+id/linear_layout"
-    android:background="@drawable/bg_login"
+    android:background="@drawable/assyst_bg"
     tools:context="com.example.adiputra.assyst.Activity.LoginActivity">
 
     <LinearLayout

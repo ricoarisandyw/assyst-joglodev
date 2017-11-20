@@ -1,91 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg_login"
-    android:gravity="center"
     android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/assyst_bg"
+    android:gravity="center"
     tools:context="com.example.adiputra.assyst.Activity.LoginActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/_30sdp"
-        android:gravity="center"
-        android:weightSum="1">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:textColor="#FFF"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="LOGO ASSYST"
-            android:textSize="30dp" />
+            android:orientation="vertical"
+            android:padding="@dimen/_30sdp">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginTop="@dimen/_120sdp"
-            android:id="@+id/idTIL1"
-            android:layout_centerHorizontal="true"
-            android:textColorHint="#FFF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/idUsername"
-                android:hint="Username"
-                android:textColor="#FFF"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="#FFF"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="90dp"
+                android:src="@drawable/assyst_white" />
 
-        </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="ASSYST"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textSize="40dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/idTL2"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/idTIL1"
-            android:layout_centerHorizontal="true"
-            android:textColorHint="#FFF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Personal Assistant"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/idPassword"
-                android:hint="Password"
-                android:backgroundTint="#FFF"
-                android:textColor="#FFF"
-                android:inputType="textPassword"
-                android:layout_below="@+id/idUsername"
-                android:layout_marginTop="5dp"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/idTIL1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:textColorHint="#FFF">
 
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/idUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:backgroundTint="#FFF"
+                    android:hint="Username"
+                    android:textColor="#FFF" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/round_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="LOGIN" />
+            </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnToSignUp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/round_button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFF"
-            android:textStyle="bold"
-            android:text="SIGN UP" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/idTL2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/idTIL1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColorHint="#FFF">
 
-    </LinearLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/idPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/idUsername"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="#FFF"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textColor="#FFF" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/round_button"
+                android:text="LOGIN"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnToSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/round_button2"
+                android:text="SIGN UP"
+                android:textColor="#FFF"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ListVoucherActivity extends AppCompatActivity {
@@ -106,13 +109,8 @@ public class ListVoucherActivity extends AppCompatActivity {
             }
         });
 
-        ImageView ivFilter = (ImageView) findViewById(R.id.iv_ListVoucher_filter);
-        ivFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        fFilterInit();
 
-            }
-        });
     }
 
     private void prepareVoucherData() {
@@ -189,5 +187,39 @@ public class ListVoucherActivity extends AppCompatActivity {
             vouchers1 = voucherList;
         }
         return vouchers1;
+    }
+
+    public void fFilterInit(){
+        Button btnTerpopuler, btnTerlaris, btnTermurah, btnTermahal;
+
+        btnTerlaris = (Button) findViewById(R.id.btn_ListVoucher_terlaris);
+        btnTerlaris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(voucherList, Voucher.VoucherName);
+            }
+        });
+        btnTermahal = (Button) findViewById(R.id.btn_ListVoucher_termahal);
+        btnTermahal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        btnTermurah = (Button) findViewById(R.id.btn_ListVoucher_termurah);
+        btnTermurah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(voucherList, Voucher.VoucherPrice);
+            }
+        });
+        btnTerpopuler = (Button) findViewById(R.id.btn_ListVoucher_terpopuler);
+        btnTerpopuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 }

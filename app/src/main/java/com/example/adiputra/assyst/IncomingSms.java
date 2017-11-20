@@ -9,6 +9,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import com.example.adiputra.assyst.Activity.SpeechToTextActivity;
+import com.example.adiputra.assyst.Helper.SharedPref;
 
 /**
  * Created by rickReaper on 6/15/2017.
@@ -18,9 +19,11 @@ public class IncomingSms extends BroadcastReceiver {
     private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
     private static final String TAG = "SMSBroadcastReceiver";
     Context coni;
+    SharedPref sharedPref;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        sharedPref = new SharedPref(context);
         Log.i(TAG, "Intent Recieved: " + intent.getAction());
         coni = context;
         if (intent.getAction().equals(SMS_RECEIVED)) {
@@ -35,30 +38,10 @@ public class IncomingSms extends BroadcastReceiver {
                     Log.d("Pesan", messages[0].getMessageBody());
                     Intent i = new Intent(context, SpeechToTextActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    saveData("kontak", "Code002 "+messages[0].getMessageBody());
+                    sharedPref.saveData("kontak", "S.M.S Receiver  "+messages[0].getMessageBody());
                     context.startActivity(i);
                 }
             }
         }
-    }
-    public void saveData(String name, String value){
-        SharedPreferences prefs = coni.getSharedPreferences("UserData", 0);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(name, value);
-        Log.d(name + " masuk :", value);
-        editor.commit();
-    }
-    public String loadData(String name){
-        SharedPreferences prefs = coni.getSharedPreferences("UserData", 0);
-        String data = prefs.getString(name,"");
-        Log.d(name + " keluar:", data);
-        return data;
-    }
-    public void deleteData(){
-        SharedPreferences prefs = coni.getSharedPreferences("UserData", 0);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("username", "");
-        Log.d("Hapus Data:", "");
-        editor.commit();
     }
 }

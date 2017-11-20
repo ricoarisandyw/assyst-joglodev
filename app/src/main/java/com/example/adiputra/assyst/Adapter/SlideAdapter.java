@@ -17,7 +17,7 @@ import com.example.adiputra.assyst.R;
 
 
 public class SlideAdapter extends PagerAdapter {
-    private int[] image_resources = {R.drawable.img_cm,R.drawable.img_dr,R.drawable.img_templar,R.drawable.img_invo};
+    private int[] image_resources = {R.drawable.voucher1,R.drawable.voucher2,R.drawable.voucher3};
     private String[] describe =
             {"    Welcome to Projects Manager enjoy for using manage your project with easily, friendly and completely"
             ,"    With Projects Manager , you can create unlimited project with free account (without cost)"
