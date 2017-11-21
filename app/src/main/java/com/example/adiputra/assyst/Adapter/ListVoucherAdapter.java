@@ -36,8 +36,10 @@ import java.util.Map;
 
 public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.MyViewHolder> {
 
+    //tes
     Context context;
     private RequestQueue requestQueue;
+    private RequestQueue requestQueue2;
     private Gson gson;
     private List<Voucher> voucherList;
 
@@ -103,7 +105,7 @@ public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.
                         int _point = Integer.parseInt(point);
                         int _harga = Integer.parseInt(String.valueOf(voucher.getHarga()));
                         final int total_point = (_point)-(_harga);
-                        actionBtnRedeem(voucher.getId(), voucher.getProduk_id(), total_point);
+                        actionBtnRedeem(voucher.getId(), voucher.getProduk_id(), _harga, total_point);
                     }
                 });
 
@@ -112,10 +114,11 @@ public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.
         });
     }
 
-    public void actionBtnRedeem(int id, int produk_id, final int total_point){
+    public void actionBtnRedeem(int id, final int produk_id, final int _harga, final int total_point){
         SharedPref sharedPref = new SharedPref(context);
         final String user_id = sharedPref.loadData("id");
         String token = sharedPref.loadData("token");
+        final String point_id = sharedPref.loadData("point_id");
         requestQueue = Volley.newRequestQueue(context);
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -153,6 +156,45 @@ public class ListVoucherAdapter extends RecyclerView.Adapter<ListVoucherAdapter.
             }
         };
         requestQueue.add(stringRequest);
+
+        requestQueue2 = Volley.newRequestQueue(context);
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        gson = gsonBuilder.create();
+        String POSTLOGPOINT = "http://api.atrama-studio.com/backend/web/api-log-point?access-token="+token;
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, POSTLOGPOINT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Result result = gson.fromJson(response, Result.class);
+                            Log.i(null,"response : "+response);
+                            if(result.isResult()==true){
+                                Toast.makeText(context, "Log point success", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(context, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("transaksi_point", String.valueOf(_harga));
+                params.put("produk_id", String.valueOf(produk_id));
+                params.put("point_id", String.valueOf(point_id));
+                return params;
+            }
+        };
+        requestQueue2.add(stringRequest2);
     }
 
     @Override

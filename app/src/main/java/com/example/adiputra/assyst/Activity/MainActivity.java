@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         if(result.isResult()==true){
                             Toast.makeText(MainActivity.this, "Your Point : "+result.getPointData().getTotal(), Toast.LENGTH_SHORT).show();
                             sharedPref.saveData("point", String.valueOf(result.getPointData().getTotal()));
+                            sharedPref.saveData("point_id", String.valueOf(result.getPointData().getId()));
                             tvMainPoint.setText(String.valueOf(result.getPointData().getTotal()));
                         }else{
                             Toast.makeText(MainActivity.this, ""+result.getMessage(), Toast.LENGTH_SHORT).show();
