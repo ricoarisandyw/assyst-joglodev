@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ListVoucherActivity extends AppCompatActivity {
@@ -106,13 +108,6 @@ public class ListVoucherActivity extends AppCompatActivity {
             }
         });
 
-        ImageView ivFilter = (ImageView) findViewById(R.id.iv_ListVoucher_filter);
-        ivFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         fFilterInit();
     }
