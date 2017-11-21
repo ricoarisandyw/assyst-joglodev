@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adiputra.assyst.Adapter.SlideAdapter;
 import com.example.adiputra.assyst.Helper.SharedPref;
+import com.example.adiputra.assyst.Helper.SpeakOut;
 import com.example.adiputra.assyst.Model.Result;
 import com.example.adiputra.assyst.R;
 import com.example.adiputra.assyst.Service.MapIntentService;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        startActivity(new Intent(this,SpeechToTextActivity.class));
+        new SpeakOut(this,"Welcome to Assyst. Your personal assistant.");
 
         String username = sharedPref.loadData("username");
         tvUsername = (TextView) findViewById(R.id.tv_username);

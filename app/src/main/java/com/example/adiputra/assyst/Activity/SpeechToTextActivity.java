@@ -3,7 +3,6 @@ package com.example.adiputra.assyst.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.AudioManager;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -23,10 +22,9 @@ import com.example.adiputra.assyst.Helper.SpeakOut;
 import com.example.adiputra.assyst.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
-public class SpeechToTextActivity extends AppCompatActivity {
+public class SpeechToTextActivity extends AppCompatActivity{
 
     private TextView txtSpeechInput;
     private ImageButton btnSpeak;
@@ -34,14 +32,14 @@ public class SpeechToTextActivity extends AppCompatActivity {
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private TextToSpeech tts;
     SharedPref sharedPref;
-    String messages;
-    String text;
+    String sender;
 //    Assyst assyst = new Assyst();
 
     ArrayList<String> contactList;
     Cursor cursor;
     int counter;
     SpeakOut speakOut;
+    String messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +47,19 @@ public class SpeechToTextActivity extends AppCompatActivity {
         setContentView(R.layout.activity_speech_to_text);
         sharedPref = new SharedPref(this);
 
-//        text = sharedPref.loadData("kontak");
-//        messages = text;
-//        messages = new ContactReader(this).findByPhone(text).getName();
+        sender = sharedPref.loadData("sender");
+        Log.d("Message<<<", sender);
+        messages = sender;
+        messages = new ContactReader(this).findByPhone(sender).getName();
 
-        speakOut = new SpeakOut(this);
-        speakOut.speakOut("Welcome, to the mobile legend");
+        speakOut = new SpeakOut(this, "You got message from "+ sender);
 
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
         txtSpeechInput.setText("");
         btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
         btnSend = (ImageButton) findViewById(R.id.btnSend);
 
-        txtSpeechInput.setText(text);
+        txtSpeechInput.setText(sender);
 
         // hide the action bar
 
