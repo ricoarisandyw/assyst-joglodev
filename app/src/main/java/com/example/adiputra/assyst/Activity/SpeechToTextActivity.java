@@ -49,10 +49,10 @@ public class SpeechToTextActivity extends AppCompatActivity{
 
         sender = sharedPref.loadData("sender");
         Log.d("Message<<<", sender);
-        messages = sender;
+        messages = sharedPref.loadData("kontak");;
         messages = new ContactReader(this).findByPhone(sender).getName();
 
-        speakOut = new SpeakOut(this, "You got message from "+ sender);
+        speakOut = new SpeakOut(this, "You got message from "+ sender+ " said " + messages);
 
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
         txtSpeechInput.setText("");
